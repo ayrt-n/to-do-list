@@ -11,11 +11,59 @@
   </head>
   <body>
     <nav class="navbar">
-      <div class="navbar-item burger" aria-label="menu" aria-expanded="false">
+      <div class="navbar-item burger" id="burger" aria-label="menu" aria-expanded="false">
         <span class="line line1"></span>
         <span class="line line2"></span>
         <span class="line line3"></span>
       </div>
     </nav>
+    <div class="menu is-hidden">
+      <div class="menu-navigation">
+        <div class="menu-item selected">
+          <img src="./images/inbox.svg" class="small-icon">
+          Inbox
+        </div>
+        <div class="menu-item">
+          <img src="./images/calendar.svg" class="small-icon">
+          Calendar
+        </div>
+      </div>
+      <div class="projects">
+        <div class="menu-item">
+          <img src="./images/chevron-down.svg" class="small-icon">
+          Projects
+        </div>
+        <div class="menu-item sub-item">
+          <img src="./images/circle.svg" class="small-icon">
+          Personal
+        </div>
+      </div>
+    </div>
+    <div id="content">
+      <h1>Inbox</h1>
+      <div class="todos">
+        <div class="todo">
+          <div>
+            <div class="radio">
+              <div class="selected"></div>
+            </div>
+          </div>
+          <div>
+            <div class="title">
+              Make a super cool to-do list application
+            </div>
+            <div class="due-date sub-title">
+              12-25-2022
+            </div>
+          </div>
+          <div>
+            <img src="./images/garbage.svg" class="small-icon">
+          </div>
+        </div>
+      </div>
+      <div class="add-todo">
+        + Add task
+      </div>
+    </div>
   </body>
 </html>

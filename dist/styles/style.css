@@ -1,0 +1,50 @@
+/* Set Inter font as specified in https://rsms.me/inter/inter.css */
+:root { 
+  font-family: 'Inter', sans-serif;
+}
+@supports (font-variation-settings: normal) {
+  :root { font-family: 'Inter var', sans-serif; }
+}
+
+/* General HTML Styling */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  height: 100%;
+}
+
+body {
+  font-weight: 400;
+  letter-spacing: -0.004em;
+  height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+h1 {
+  font-weight: 750;
+  font-size: 2.5rem;
+  letter-spacing: -0.055em;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: -0.055em;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+h3 {
+  font-weight: 650;
+  font-size: 1.2rem;
+  letter-spacing: -0.018em;
+}
+
+p {
+  line-height: 1.5rem;
+}

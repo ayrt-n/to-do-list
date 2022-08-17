@@ -21,6 +21,7 @@
   --black-800: #27272a;
   --black-900: #18181b;
   --secondary-400: #fb923c;
+  --seconary-600: #ea580c;
 }
 
 /* General HTML Element Styling */
@@ -200,3 +201,29 @@ p {
   margin-top: 2px;
 }
 
+.add-todo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.plus {
+  margin-right: 1rem;
+  color: var(--seconary-600);
+  padding: 0.25rem;
+  border-radius: 50%;
+  width: 0.75rem;
+  height: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-todo:hover .plus {
+  background-color: var(--seconary-600);
+  color: var(--black-50);
+}
+
+.add-todo:hover {
+  color: var(--seconary-600);
+}

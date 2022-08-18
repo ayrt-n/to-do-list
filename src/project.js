@@ -9,5 +9,7 @@ const project = (name) => {
     todoList.splice(index, 1);
   };
 
-  return { todoList, addTodo, removeAtIndex };
+  return { name, todoList, addTodo, removeAtIndex };
 };
+
+export default project;

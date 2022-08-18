@@ -23,12 +23,16 @@ const loadProject = (project) => {
 };
 
 // Create radio button element for todo list item
-const createRadioButton = () => {
+const createRadioButton = (todo) => {
   const radioDiv = document.createElement('div');
   radioDiv.classList.add('radio');
   const selectDiv = document.createElement('div');
-  radioDiv.appendChild(selectDiv);
 
+  if (todo.getStatus() === 1) {
+    selectDiv.classList.add('selected');
+  }
+
+  radioDiv.appendChild(selectDiv);
   return radioDiv;
 };
 
@@ -66,7 +70,7 @@ const createTodoListItem = (todo, index) => {
   todoDiv.classList.add('todo');
   todoDiv.setAttribute('todo-index', index)
 
-  const radioButton = createRadioButton();
+  const radioButton = createRadioButton(todo);
   const trashIcon = createTrashIcon();
   const todoDetails = createTodoItem(todo);
 

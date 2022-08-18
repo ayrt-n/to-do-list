@@ -8,6 +8,7 @@ const loadProject = (project) => {
   header.innerHTML = project.name;
   const todosDiv = document.createElement('div');
   todosDiv.classList.add('todos');
+  todosDiv.setAttribute('project', project.name.toLowerCase());
   
   project.todoList.forEach((todo, index) => {
     const todoListItem = createTodoListItem(todo, index);
@@ -23,15 +24,12 @@ const loadProject = (project) => {
 
 // Create radio button element for todo list item
 const createRadioButton = () => {
-  const containerDiv = document.createElement('div');
   const radioDiv = document.createElement('div');
   radioDiv.classList.add('radio');
   const selectDiv = document.createElement('div');
-
   radioDiv.appendChild(selectDiv);
-  containerDiv.appendChild(radioDiv);
 
-  return containerDiv;
+  return radioDiv;
 };
 
 // Create div to display details of the todo list item
@@ -55,13 +53,11 @@ const createTodoItem = (todo) => {
 
 // Create trash icon for todo list item
 const createTrashIcon = () => {
-  const containerDiv = document.createElement('div');
   const trashIcon = document.createElement('img');
   trashIcon.src = trashSvg;
   trashIcon.classList.add('small-icon');
 
-  containerDiv.appendChild(trashIcon);
-  return containerDiv;
+  return trashIcon;
 };
 
 // Create the complete todo list element for the DOM

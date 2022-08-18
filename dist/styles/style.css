@@ -91,6 +91,7 @@ p {
   background-color: var(--primary-500);
   display: flex;
   align-items: center;
+  z-index: 30;
 }
 
 .navbar-item {
@@ -169,21 +170,19 @@ p {
 
 .radio {
   margin-top: 2px;
-  height: 0.75rem;
-  width: 0.75rem;
+  height: 1rem;
+  width: 1rem;
   border-radius: 50%;
   border: 1.5px var(--black-700) solid;
   margin-right: 1rem;
   position: relative;
+  box-sizing: border-box;
 }
 
-.radio .selected {
-  box-sizing: border-box;
-  height: 100%;
-  width: 100%;
+.radio.selected {
+  padding: 0.15rem;
+  background-clip: content-box;
   background-color: var(--secondary-400);
-  border: 2px var(--black-50) solid;
-  border-radius: 50%;
 }
 
 .project-details {

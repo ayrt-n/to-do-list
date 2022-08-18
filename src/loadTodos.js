@@ -9,8 +9,8 @@ const loadProject = (project) => {
   const todosDiv = document.createElement('div');
   todosDiv.classList.add('todos');
   
-  project.todoList.forEach(todo => {
-    const todoListItem = createTodoListItem(todo);
+  project.todoList.forEach((todo, index) => {
+    const todoListItem = createTodoListItem(todo, index);
     todosDiv.appendChild(todoListItem);
   });
 
@@ -65,14 +65,14 @@ const createTrashIcon = () => {
 };
 
 // Create the complete todo list element for the DOM
-const createTodoListItem = (todo) => {
+const createTodoListItem = (todo, index) => {
   const todoDiv = document.createElement('div');
   todoDiv.classList.add('todo');
+  todoDiv.setAttribute('todo-index', index)
 
   const radioButton = createRadioButton();
   const trashIcon = createTrashIcon();
   const todoDetails = createTodoItem(todo);
-  
 
   todoDiv.appendChild(radioButton);
   todoDiv.appendChild(todoDetails);

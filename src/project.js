@@ -5,11 +5,24 @@ const project = (name) => {
     todoList.push(todo);
   };
 
-  const removeAtIndex = (index) => {
+  const removeTodo = (index) => {
     todoList.splice(index, 1);
   };
 
-  return { name, todoList, addTodo, removeAtIndex };
+  const toggleTodoStatus = (index) => {
+    const todo = todoList[index];
+    todo.toggleStatus()
+  }
+
+  const editTodo = (index, title, description, dueDate, priority) => {
+    const todo = todoList[index];
+    todo.title = title;
+    todo.description = description;
+    todo.dueDate = dueDate;
+    todo.priority = priority;
+  };
+
+  return { name, todoList, addTodo, removeTodo, toggleTodoStatus, editTodo };
 };
 
 export default project;

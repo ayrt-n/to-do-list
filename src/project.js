@@ -22,7 +22,11 @@ const project = (name) => {
     todo.priority = priority;
   };
 
-  return { name, todoList, addTodo, removeTodo, toggleTodoStatus, editTodo };
+  const getTodo = (index) => {
+    return todoList[index];
+  };
+
+  return { name, todoList, addTodo, removeTodo, toggleTodoStatus, editTodo, getTodo };
 };
 
 export default project;

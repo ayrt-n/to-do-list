@@ -5,12 +5,12 @@ const todo = (title, description, dueDate, priority) => {
     return status;
   };
 
+  // Status of zero is incomplete, status of one is complete
   const toggleStatus = () => {
     status = status === 0 ? 1 : 0;
   };
 
   // Return todo proprties
-  // Status of zero is incomplete, status of one is complete
   return { title, description, dueDate, priority, getStatus, toggleStatus };
 }
 

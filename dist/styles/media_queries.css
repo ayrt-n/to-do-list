@@ -1,0 +1,28 @@
+@media screen and (min-width: 768px) {
+  .burger {
+    display: none;
+  }
+
+  .menu.is-hidden {
+    display: block;
+  }
+
+  #content {
+    position: fixed;
+    left: 280px;
+    padding: 2rem 1.5rem;
+    width: 100%;
+  }
+
+  .todos {
+    margin: 0 auto 2rem 0;
+    max-width: 900px;
+  }
+
+}
+
+@media screen and (min-width: 1024px) {
+  #content {
+    padding: 2.5rem 4rem;
+  }
+}

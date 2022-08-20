@@ -163,6 +163,10 @@ p {
   margin-bottom: 1rem;
 }
 
+.todos {
+  margin-bottom: 2rem;
+}
+
 .todo {
   display: flex;
   margin-bottom: 1rem;

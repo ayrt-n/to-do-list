@@ -10,19 +10,19 @@
   #content {
     position: fixed;
     left: 280px;
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 4rem;
     width: 100%;
   }
 
   .todos {
     margin: 0 auto 2rem 0;
-    max-width: 900px;
   }
 
-}
+  .radio {
+    margin-right: 2rem;
+  }
 
-@media screen and (min-width: 1024px) {
-  #content {
-    padding: 2.5rem 4rem;
+  .project-details {
+    margin-right: 2rem;
   }
 }

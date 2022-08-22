@@ -9,6 +9,7 @@ const loadProject = (project) => {
   const todosDiv = document.createElement('div');
   todosDiv.classList.add('todos');
   todosDiv.appendChild(header);
+  todosDiv.id = project.name.toLowerCase();
   
   project.todoList.forEach((todo, index) => {
     const todoListItem = createTodoListItem(todo, project, index);
@@ -19,6 +20,23 @@ const loadProject = (project) => {
 
   todosDiv.appendChild(addTask);
   contentDiv.appendChild(todosDiv);
+};
+
+const reloadProject = (project) => {
+  const projectDiv = document.getElementById(project.name.toLowerCase());
+  projectDiv.innerHTML = '';
+
+  const header = document.createElement('h1');
+  header.innerHTML = project.name;
+  projectDiv.appendChild(header);
+
+  project.todoList.forEach((todo, index) => {
+    const todoListItem = createTodoListItem(todo, project, index);
+    projectDiv.appendChild(todoListItem);
+  });
+
+  const addTask = createAddTaskButton(project);
+  projectDiv.appendChild(addTask);
 };
 
 // Create radio button element for todo list item
@@ -101,4 +119,7 @@ const createAddTaskButton = (project) => {
   return addTodoDiv;
 };
 
-export default loadProject;
+export {
+  loadProject,
+  reloadProject
+};

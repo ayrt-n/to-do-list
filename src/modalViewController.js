@@ -24,19 +24,20 @@ const displayTodoModal = (todo) => {
 };
 
 // Display new todo form in a modal
-const displayNewTodoModal = () => {
+const displayNewTodoModal = (projectName) => {
   modalContent.innerHTML = '';
-  const todoForm = _createNewTodoModal();
+  const todoForm = _createNewTodoModal(projectName);
   modalContent.appendChild(todoForm);
   modal.style.display = 'block';
 };
 
-const _createNewTodoModal = () => {
+const _createNewTodoModal = (project) => {
   const todoTitle = _createTitleField();
   const todoPriority = _createPriorityField();
   const todoDueDate = _createDueDateField();
   const todoDescription = _createDescriptionField();
   const submitBtn = _createBtn('Add todo');
+  const hiddenProjectInput = _createHiddenProjectField(project);
 
   const form = document.createElement('form')
   form.id = 'new-todo-form';
@@ -45,7 +46,8 @@ const _createNewTodoModal = () => {
   form.appendChild(todoPriority);
   form.appendChild(todoDueDate);
   form.appendChild(todoDescription);
-  form.appendChild(submitBtn)
+  form.appendChild(submitBtn);
+  form.appendChild(hiddenProjectInput);
 
   return form;
 };
@@ -166,12 +168,21 @@ const _createDescriptionField = () => {
 const _createBtn = (buttonText) => {
   const fieldDiv = document.createElement('div');
   fieldDiv.classList.add('field')
-  const button = document.createElement('button');
+  const button = document.createElement('a');
   button.classList.add('button');
   button.innerHTML = buttonText;
 
   fieldDiv.appendChild(button);
   return fieldDiv;
+}
+
+const _createHiddenProjectField = (project) => {
+  const hiddenField = document.createElement('input');
+  hiddenField.setAttribute('type', 'hidden');
+  hiddenField.value = project;
+  hiddenField.id = 'project';
+
+  return hiddenField;
 }
 
 export {

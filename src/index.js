@@ -2,7 +2,7 @@ import todo from "./todo";
 import project from "./project";
 import loadProject from "./loadTodos";
 import { displayTodoModal, displayNewTodoModal } from "./modalViewController";
-import { toggleTodoButton } from "./todoViewController";
+import { toggleTodoButton, removeTodoItem } from "./todoViewController";
 
 const burger = document.getElementById('burger');
 const menu = document.getElementById('menu');
@@ -52,11 +52,10 @@ mainContentDiv.addEventListener('click', (e) => {
   if (e.target.matches('.radio')) {
     toggleTodoButton(e.target);
     projects[projectName].toggleTodoStatus(todoIndex);
-  } else if (e.target.closest('.title')) {
+  } else if (e.target.matches('.title')) {
     displayTodoModal(todoItem);
   } else if (e.target.matches('.delete')) {
-    // Delete todo stuff
-    console.log('c');
+    removeTodoItem(e.target);
   } else if (e.target.matches('.add-todo')) {
     displayNewTodoModal();
   }

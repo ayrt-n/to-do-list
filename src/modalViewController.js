@@ -36,6 +36,7 @@ const _createNewTodoModal = () => {
   const todoPriority = _createPriorityField();
   const todoDueDate = _createDueDateField();
   const todoDescription = _createDescriptionField();
+  const submitBtn = _createBtn('Add todo');
 
   const form = document.createElement('form')
   form.id = 'new-todo-form';
@@ -44,6 +45,7 @@ const _createNewTodoModal = () => {
   form.appendChild(todoPriority);
   form.appendChild(todoDueDate);
   form.appendChild(todoDescription);
+  form.appendChild(submitBtn)
 
   return form;
 };
@@ -160,6 +162,17 @@ const _createDescriptionField = () => {
 
   return descriptionDiv;
 };
+
+const _createBtn = (buttonText) => {
+  const fieldDiv = document.createElement('div');
+  fieldDiv.classList.add('field')
+  const button = document.createElement('button');
+  button.classList.add('button');
+  button.innerHTML = buttonText;
+
+  fieldDiv.appendChild(button);
+  return fieldDiv;
+}
 
 export {
   displayTodoModal,

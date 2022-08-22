@@ -1,6 +1,6 @@
 import todo from "./todo";
 import project from "./project";
-import loadProject from "./loadTodos";
+import { loadProject, reloadProject } from "./loadTodos";
 import { displayTodoModal, displayNewTodoModal } from "./modalViewController";
 import { toggleTodoButton, removeTodoItem } from "./todoViewController";
 
@@ -55,8 +55,32 @@ mainContentDiv.addEventListener('click', (e) => {
   } else if (e.target.matches('.title')) {
     displayTodoModal(todoItem);
   } else if (e.target.matches('.delete')) {
-    removeTodoItem(e.target);
+    projects[projectName].removeTodo(todoIndex);
+    console.log(projects[projectName]);
+    reloadProject(projects[projectName]);
   } else if (e.target.matches('.add-todo')) {
-    displayNewTodoModal();
+    displayNewTodoModal(projectName);
   }
+});
+
+// Modal content div contains ability to create and edit new todos and projects
+const modalContentDiv = document.getElementsByClassName('modal-content')[0];
+
+modalContentDiv.addEventListener('click', (e) => {
+  // Guard clause, only element which should have impact are buttons
+  if (!e.target.matches('.button')) return;
+
+  // Create todo item using form input data
+  const titleValue = document.getElementById('title').value;
+  const priorityValue = document.getElementById('priority').value;
+  const dueDateValue = document.getElementById('duedate').value;
+  const descriptionValue = document.getElementById('description').value;
+  const projectValue = document.getElementById('project').value;
+  const todoItem = todo(titleValue, descriptionValue, dueDateValue, priorityValue);
+
+  modal.style.display = 'none';
+
+  // Add todo item to project todo list and refresh DOM
+  projects[projectValue].addTodo(todoItem);
+  reloadProject(projects[projectValue]);
 });

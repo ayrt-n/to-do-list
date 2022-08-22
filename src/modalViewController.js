@@ -18,14 +18,16 @@ closeModalBtn.onclick = () => {
 // Display more detail modal given a todo object
 const displayTodoModal = (todo) => {
   modalContent.innerHTML = '';
-  _createTodoModal(todo);
+  const todoModal = _createTodoModal(todo);
+  modalContent.appendChild(todoModal);
   modal.style.display = 'block';
 };
 
 // Display new todo form in a modal
 const displayNewTodoModal = () => {
   modalContent.innerHTML = '';
-  _createNewTodoModal();
+  const todoForm = _createNewTodoModal();
+  modalContent.appendChild(todoForm);
   modal.style.display = 'block';
 };
 
@@ -35,10 +37,15 @@ const _createNewTodoModal = () => {
   const todoDueDate = _createDueDateField();
   const todoDescription = _createDescriptionField();
 
-  modalContent.appendChild(todoTitle);
-  modalContent.appendChild(todoPriority);
-  modalContent.appendChild(todoDueDate);
-  modalContent.appendChild(todoDescription);
+  const form = document.createElement('form')
+  form.id = 'new-todo-form';
+
+  form.appendChild(todoTitle);
+  form.appendChild(todoPriority);
+  form.appendChild(todoDueDate);
+  form.appendChild(todoDescription);
+
+  return form;
 };
 
 // Create more details modal and append to modal content div
@@ -50,10 +57,14 @@ const _createTodoModal = (todo) => {
   const dueDate = _createModalTextSection('Due date', todo.dueDate);
   const description = _createModalTextSection('Description', todo.description);
 
-  modalContent.appendChild(header);
-  modalContent.appendChild(priority);
-  modalContent.appendChild(dueDate);
-  modalContent.appendChild(description);
+  const div = document.createElement('div');
+
+  div.appendChild(header);
+  div.appendChild(priority);
+  div.appendChild(dueDate);
+  div.appendChild(description);
+
+  return div;
 };
 
 // Create a standard modal text element with title and text content

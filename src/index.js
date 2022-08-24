@@ -1,15 +1,9 @@
 import todo from "./todo";
 import project from "./project";
+import burger from "./menuController";
 import { loadProject, reloadProject } from "./loadTodos";
 import { displayTodoModal, displayNewTodoModal } from "./modalViewController";
 import { toggleTodoButton, removeTodoItem } from "./todoViewController";
-
-const burger = document.getElementById('burger');
-const menu = document.getElementById('menu');
-
-burger.addEventListener('click', () => {
-  menu.classList.toggle('is-hidden');
-});
 
 const inbox = project('Inbox');
 const testTodo1 = todo('A dynamically generated task', 'N/a', 'Whenever', 'High');

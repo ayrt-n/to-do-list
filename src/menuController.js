@@ -2,6 +2,7 @@ import inboxSVG from './images/inbox.svg';
 import calendarSVG from './images/inbox.svg';
 import chevronSVG from './images/chevron-down.svg';
 import circleSVG from './images/circle.svg';
+import { clearProjects, loadProject } from './loadTodos';
 
 const burger = document.getElementById('burger');
 const menu = document.getElementById('menu');
@@ -11,9 +12,9 @@ burger.addEventListener('click', () => {
 });
 
 const loadMenu = (projectsObject) => {
-  console.log('hi');
   const inboxBtn = createMenuButton('Inbox', inboxSVG);
   inboxBtn.classList.add('selected');
+  inboxBtn.setAttribute('project-name', 'inbox');
 
   const projectsDiv = document.createElement('div');
   projectsDiv.classList.add('projects');
@@ -22,6 +23,7 @@ const loadMenu = (projectsObject) => {
   
   for (let project in projectsObject) {
     const projectBtn = createMenuButton(projectsObject[project].name, circleSVG);
+    projectBtn.setAttribute('project-name', project)
     projectBtn.classList.add('sub-item');
     projectsDiv.appendChild(projectBtn);
   }

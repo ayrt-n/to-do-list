@@ -1,15 +1,16 @@
 import Todo from "./todo";
 import project from "./project";
-import burger from "./menuController";
+import { loadMenu } from "./menuController";
 import { loadProject, reloadProject } from "./loadTodos";
 import { displayTodoModal, displayNewTodoModal } from "./modalViewController";
-import { toggleTodoButton, removeTodoItem } from "./todoViewController";
+import { toggleTodoButton } from "./todoViewController";
 import { loadProjectsFromLocalStorage, setObject, getObject } from "./localStorage";
 
 // Load projects from local storage or generates new projects object
 const projects = loadProjectsFromLocalStorage();
 
 // By default load the inbox project 
+loadMenu(projects);
 loadProject(projects['inbox']);
 
 // Main content div contains todo lists and related functionality

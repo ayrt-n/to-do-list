@@ -1,5 +1,5 @@
 import project from "./project";
-import todo from "./todo";
+import Todo from "./todo";
 
 const loadProjectsFromLocalStorage = () => {
   let result;
@@ -38,7 +38,11 @@ const createTodoList = (todoList) => {
   const todoListTmp = [];
 
   for (let i = 0; i < todoList.length; i++) {
-    const todoItem = todo(todoList[i].title, todoList[i].description, todoList[i].dueDate, todoList[i].priority);
+    const todoItem = new Todo(todoList[i].title,
+                              todoList[i].description,
+                              todoList[i].dueDate,
+                              todoList[i].priority,
+                              todoList[i].status);
     todoListTmp.push(todoItem);
   }
 

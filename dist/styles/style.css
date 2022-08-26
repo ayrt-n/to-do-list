@@ -157,6 +157,7 @@ p {
   position: relative;
   top: 3.25rem;
   padding: 1rem 0.75rem;
+  box-sizing: border-box;
 }
 
 #content h1 {
@@ -183,6 +184,7 @@ p {
   position: relative;
   box-sizing: border-box;
   cursor: pointer;
+  aspect-ratio: 1;
 }
 
 .radio.selected {
@@ -192,7 +194,7 @@ p {
 }
 
 .project-details {
-  margin-right: 1rem;
+  margin-right: auto;
 }
 
 .todo .title {
@@ -204,6 +206,11 @@ p {
 .todo .sub-title {
   color: var(--black-700);
   font-size: 0.85rem;
+}
+
+.delete {
+  cursor: pointer;
+  margin-left: 1rem;
 }
 
 .add-todo {
@@ -396,8 +403,4 @@ input[type="date"] {
 
 .button:active {
   background-color: var(--primary-700);
-}
-
-.delete {
-  cursor: pointer;
 }

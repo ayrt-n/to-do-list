@@ -11,11 +11,12 @@
     position: fixed;
     left: 280px;
     padding: 2.5rem 4rem;
-    width: 100%;
+    width: calc(100% - 280px);
   }
 
   .todos {
     margin: 0 auto 2rem 0;
+    max-width: fit-content;
   }
 
   .radio {
@@ -23,6 +24,10 @@
   }
 
   .project-details {
-    margin-right: 2rem;
+    margin-right: auto;
+  }  
+
+  .delete {
+    margin-left: 2rem;
   }
 }

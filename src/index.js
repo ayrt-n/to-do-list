@@ -1,7 +1,7 @@
 import Todo from "./todo";
 import project from "./project";
 import { loadMenu } from "./menuController";
-import { loadProject, reloadProject } from "./loadTodos";
+import { loadProject, reloadProject, clearProjects } from "./loadTodos";
 import { displayTodoModal, displayNewTodoModal } from "./modalViewController";
 import { toggleTodoButton } from "./todoViewController";
 import { loadProjectsFromLocalStorage, setObject, getObject } from "./localStorage";
@@ -12,6 +12,15 @@ const projects = loadProjectsFromLocalStorage();
 // By default load the inbox project 
 loadMenu(projects);
 loadProject(projects['inbox']);
+
+// Menu event listener
+menu.addEventListener('click', (e) => {
+  if (e.target.matches('.menu-item')) {
+    const projectName = e.target.getAttribute('project-name');
+    clearProjects();
+    loadProject(projects[projectName]);
+  }
+});
 
 // Main content div contains todo lists and related functionality
 const mainContentDiv = document.getElementById('content');

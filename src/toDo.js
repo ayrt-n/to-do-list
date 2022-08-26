@@ -1,7 +1,8 @@
 function Todo(title, description, dueDate, priority, status = 0) {
   this.title = title;
   this.description = description;
-  this.dueDate = dueDate;
+  // Set due date if provided, otherwise set to N/A
+  this.dueDate = dueDate || 'N/A'; 
   this.priority = priority;
   // Completed status of the todo - incomplete (0) is default value for new todo, completed (1)
   this.status = status;

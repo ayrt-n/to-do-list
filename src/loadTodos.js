@@ -3,6 +3,10 @@ import trashSvg from './images/garbage.svg';
 // Module to load project and associated todos to DOM
 const contentDiv = document.getElementById('content');
 
+const clearProjects = () => {
+  contentDiv.innerHTML = '';
+};
+
 const loadProject = (project) => {
   const header = document.createElement('h1');
   header.innerHTML = project.name;
@@ -121,5 +125,6 @@ const createAddTaskButton = (project) => {
 
 export {
   loadProject,
-  reloadProject
+  reloadProject,
+  clearProjects
 };

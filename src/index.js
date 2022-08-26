@@ -19,6 +19,11 @@ menu.addEventListener('click', (e) => {
     const projectName = e.target.getAttribute('project-name');
     clearProjects();
     loadProject(projects[projectName]);
+
+    const prevSelect = document.querySelector('.menu-item.selected');
+    prevSelect.classList.remove('selected');
+
+    e.target.classList.add('selected');
   }
 });
 

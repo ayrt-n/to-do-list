@@ -171,7 +171,12 @@ p {
 
 .todo {
   display: flex;
-  margin-bottom: 1rem;
+  border-radius: 6px;
+  padding: 0.75rem;
+}
+
+.todo:hover {
+  background-color: var(--black-50);
 }
 
 .radio {
@@ -217,7 +222,7 @@ p {
   display: flex;
   align-items: center;
   cursor: pointer;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 
 .plus {

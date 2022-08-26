@@ -46,7 +46,7 @@ const createRadioButton = (todo, project, index) => {
   radioDiv.setAttribute('todo-index', index);
   radioDiv.setAttribute('project', project.name.toLowerCase());
   
-  if (todo.getStatus() === 1) {
+  if (todo.status === 1) {
     radioDiv.classList.add('selected');
   }
 

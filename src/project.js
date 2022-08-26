@@ -5,6 +5,12 @@ const project = (name) => {
     todoList.push(todo);
   };
 
+  const addTodoList = (todoArray) => {
+    for (let i = 0; i < todoArray.length; i++) {
+      addTodo(todoArray[i]);
+    }
+  }
+
   const removeTodo = (index) => {
     todoList.splice(index, 1);
   };
@@ -26,7 +32,7 @@ const project = (name) => {
     return todoList[index];
   };
 
-  return { name, todoList, addTodo, removeTodo, toggleTodoStatus, editTodo, getTodo };
+  return { name, todoList, addTodo, addTodoList, removeTodo, toggleTodoStatus, editTodo, getTodo };
 };
 
 export default project;

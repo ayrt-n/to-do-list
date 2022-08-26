@@ -1,17 +1,15 @@
-const todo = (title, description, dueDate, priority) => {
-  let status = 0;
-
-  const getStatus = () => {
-    return status;
-  };
-
-  // Status of zero is incomplete, status of one is complete
-  const toggleStatus = () => {
-    status = status === 0 ? 1 : 0;
-  };
-
-  // Return todo proprties
-  return { title, description, dueDate, priority, getStatus, toggleStatus };
+function Todo(title, description, dueDate, priority, status = 0) {
+  this.title = title;
+  this.description = description;
+  this.dueDate = dueDate;
+  this.priority = priority;
+  // Completed status of the todo - incomplete (0) is default value for new todo, completed (1)
+  this.status = status;
 }
 
-export default todo;
+// toggleStatus switches todo from incomplete (0) to complete (1) and vice versa
+Todo.prototype.toggleStatus = function() {
+  this.status = this.status === 0 ? 1 : 0;
+}
+
+export default Todo;

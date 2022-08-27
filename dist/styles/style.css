@@ -125,6 +125,12 @@ p {
   padding: 2rem;
   font-size: 1.2rem;
   z-index: 30;
+  transition: transform 150ms ease;
+}
+
+.menu.is-hidden {
+  transform: translateX(-280px);
+  display: block;
 }
 
 .menu-item {

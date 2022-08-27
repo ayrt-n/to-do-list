@@ -5,6 +5,7 @@
 
   .menu.is-hidden {
     display: block;
+    transform: translateX(0);
   }
 
   #content {

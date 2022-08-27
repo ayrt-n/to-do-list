@@ -322,10 +322,6 @@ input, textarea, select {
   box-sizing: border-box;
 }
 
-.field:not(:last-child) {
-  margin-bottom: 0.75rem;
-}
-
 .label:not(:last-child) {
   margin-bottom: 0.5em;
 }
@@ -336,6 +332,14 @@ input, textarea, select {
   font-weight: 700;
 }
 
+.field:not(:last-child) {
+  margin-bottom: 0.75rem;
+}
+
+.field-label .label {
+  font-size: inherit;
+}
+
 .control {
   box-sizing: border-box;
   clear: both;
@@ -344,35 +348,97 @@ input, textarea, select {
   text-align: inherit;
 }
 
-.input, .textarea, .select select {
-  box-shadow: inset 0 0.0625em 0.125em rgba(10, 10, 10, 0.05);
-  max-width: 100%;
-  width: 100%;
-  -webkit-appearance: none;
+.button {
+  color: var(--black-50);
+  background-color: var(--primary-600);
+}
+
+.button:hover {
+  background-color: var(--primary-500);
+}
+
+.button:active {
+  background-color: var(--primary-700);
+}
+
+.button, .input, .textarea, .select select, .date input[type="date"] {
   -moz-appearance: none;
+  -webkit-appearance: none;
   align-items: center;
   border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: none;
   display: inline-flex;
-  background-color: #fff;
-  border-color: #dbdbdb;
-  border-radius: 0.375em;
   font-size: 1rem;
   height: 2.5em;
   justify-content: flex-start;
   line-height: 1.5;
-  padding: calc(0.1em - 1px) calc(0.75em - 1px);
+  padding-bottom: calc(0.5em - 1px);
+  padding-left: calc(0.75em - 1px);
+  padding-right: calc(0.75em - 1px);
+  padding-top: calc(0.5em - 1px);
   position: relative;
   vertical-align: top;
-  font-family: inherit;
 }
 
-.textarea:not([rows]) {
-  max-height: 40em;
-  min-height: 12em;
+.button:focus, .input:focus, .textarea:focus, .select select:focus, .date input[type="date"]:focus,
+.button:active, .input:active, .textarea:active, .select select:active, .date input[type="date"]:active {
+  outline: none;
 }
 
-.textarea[rows] {
-  height: initial;
+.button {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.select:not(.is-multiple):not(.is-loading)::after {
+  border: 3px solid transparent;
+  border-radius: 2px;
+  border-right: 0;
+  border-top: 0;
+  content: " ";
+  display: block;
+  height: 0.625em;
+  margin-top: -0.4375em;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: rotate(-45deg);
+  transform-origin: center;
+  width: 0.625em;
+}
+
+.input, .textarea, .select select, .date input[type="date"] {
+  background-color: white;
+  border-color: #dbdbdb;
+  border-radius: 4px;
+  color: #363636;
+}
+
+.input::-moz-placeholder, .textarea::-moz-placeholder, .select select::-moz-placeholder, .date input[type="date"]::-moz-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+}
+
+.input::-webkit-input-placeholder, .textarea::-webkit-input-placeholder, .select select::-webkit-input-placeholder, .date input[type="date"]::-webkit-input-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+}
+
+.input:hover, .textarea:hover, .select select:hover, .date input[type="date"]:hover {
+  border-color: #b5b5b5;
+}
+
+.input:focus, .textarea:focus, .select select:focus, .date input[type="date"]:focus {
+  border-color: #485fc7;
+  box-shadow: 0 0 0 0.125em rgba(72, 95, 199, 0.25);
+}
+
+.input, .textarea {
+  box-shadow: inset 0 0.0625em 0.125em rgba(10, 10, 10, 0.05);
+  max-width: 100%;
+  width: 100%;
 }
 
 .textarea {
@@ -383,60 +449,54 @@ input, textarea, select {
   resize: vertical;
 }
 
-.input:hover, .textarea:hover, .select select:hover {
-  border-color: #b5b5b5;
+.textarea:not([rows]) {
+  max-height: 40em;
+  min-height: 8em;
 }
 
-.input:focus, .textarea:focus, .select select:focus {
-  border-color: var(--primary-500);
-  box-shadow: 0 0 0 0.125em rgba(76, 29, 149, 0.25);
+.textarea[rows] {
+  height: initial;
 }
 
-.select {
+.select, .date {
   display: inline-block;
   max-width: 100%;
   position: relative;
   vertical-align: top;
 }
 
-select {
+.select:not(.is-multiple), .date {
+  height: 2.5em;
+}
+
+.select:not(.is-multiple):not(.is-loading)::after {
+  border-color: #485fc7;
+  right: 1.125em;
+  z-index: 4;
+}
+
+.select select, .date input[type="date"] {
   cursor: pointer;
   display: block;
+  font-size: 1em;
   max-width: 100%;
-  font-size: 1rem;
   outline: none;
-  padding: calc(0.1em - 1px) calc(0.75em - 1px);
 }
 
-input[type="date"] {
-  font-size: 1rem;
-  padding: calc(0.1em - 1px) calc(0.75em - 1px);
+.select select::-ms-expand {
+  display: none;
 }
 
-.button {
-  background-color: var(--primary-600);
-  color: var(--black-50);
-  cursor: pointer;
-  padding: calc(0.25em - 1px) 0.75em;
-  text-align: center;
-  white-space: nowrap;
-  user-select: none;
-  border: 1px solid transparent;
-  border-radius: 0.375em;
-  box-shadow: none;
-  height: 2.5em;
-  font-size: 1rem;
-  line-height: 2.5em;
-  display: inline-flex;
-  align-items: center;
-  vertical-align: top;
-  justify-content: center;
+.select select:not([multiple]) {
+  padding-right: 2.5em;
 }
 
-.button:hover {
-  background-color: var(--primary-500);
+.select select[multiple] {
+  height: auto;
+  padding: 0;
 }
 
-.button:active {
-  background-color: var(--primary-700);
+.select:not(.is-multiple):not(.is-loading):hover::after {
+  border-color: #363636;
 }
+

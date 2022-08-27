@@ -23,8 +23,7 @@ const loadProjects = (projectsObject) => {
 // Create and display a project in the main content div
 // Should receive a project object
 const loadProject = (project, projectIndex) => {
-  const header = document.createElement('h1');
-  header.innerHTML = project.name;
+  const header = createProjectHeader(project, projectIndex);
   const todosDiv = document.createElement('div');
   todosDiv.classList.add('todos');
   todosDiv.appendChild(header);
@@ -46,8 +45,7 @@ const reloadProject = (project, projectIndex) => {
   const projectDiv = document.getElementById(project.name.toLowerCase());
   projectDiv.innerHTML = '';
 
-  const header = document.createElement('h1');
-  header.innerHTML = project.name;
+  const header = createProjectHeader(project, projectIndex);
   projectDiv.appendChild(header);
 
   project.todoList.forEach((todo, todoIndex) => {
@@ -58,6 +56,15 @@ const reloadProject = (project, projectIndex) => {
   const addTask = createAddTaskButton(projectIndex);
   projectDiv.appendChild(addTask);
 };
+
+// Create project header with associated buttons
+const createProjectHeader = (project, projectIndex) => {
+  const projectHeader = document.createElement('h1');
+  projectHeader.innerHTML = project.name;
+  projectHeader.setAttribute('project-index', projectIndex);
+
+  return projectHeader;
+}
 
 // Create radio button element for todo list item
 const createRadioButton = (todo, projectIndex, todoIndex) => {

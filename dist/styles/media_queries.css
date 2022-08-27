@@ -10,9 +10,12 @@
 
   #content {
     position: fixed;
+    overflow-y: scroll;
+    top: 3.25rem;
     left: 280px;
     padding: 2.5rem 4rem;
     width: calc(100% - 280px);
+    height: 100%;
   }
 
   .todos {

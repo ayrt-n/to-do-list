@@ -80,6 +80,11 @@ p {
   width: auto;
 }
 
+.medium-icon {
+  height: 1.5rem;
+  width: auto;
+}
+
 .is-hidden {
   display: none;
 }
@@ -120,7 +125,7 @@ p {
 .menu {
   box-sizing: border-box;
   position: fixed;
-  overflow-y: scroll;
+  overflow-y: auto;
   top: 3.25rem;
   width: 280px;
   background-color: var(--black-100);

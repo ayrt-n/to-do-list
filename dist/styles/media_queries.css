@@ -10,7 +10,7 @@
 
   #content {
     position: fixed;
-    overflow-y: scroll;
+    overflow-y: auto;
     top: 3.25rem;
     left: 280px;
     padding: 2.5rem 4rem;

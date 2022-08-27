@@ -1,7 +1,7 @@
 import Todo from "./todo";
 import project from "./project";
 import { loadMenu, toggleMenuSelect } from "./menuViewController";
-import { displayTodoModal, displayNewTodoModal } from "./modalViewController";
+import { displayTodoModal, displayNewTodoModal, displayNewProjectModal } from "./modalViewController";
 import { toggleTodoButton, loadProject, loadProjects, reloadProject, clearProjects } from "./todoViewController";
 import { loadProjectsFromLocalStorage, setObject, getObject } from "./localStorage";
 
@@ -15,15 +15,17 @@ loadProject(projects[0], 0);
 // Menu event listener
 menu.addEventListener('click', (e) => {
   if (e.target.matches('.menu-item')) {
-    const projectIndex = e.target.getAttribute('project-index');
+    const tab = e.target.getAttribute('menu-tab');
 
-    if (projectIndex) {
+    if (tab === 'new-project') {
+      displayNewProjectModal();
+    } else if (tab === 'all-projects') {
       clearProjects();
-      loadProject(projects[projectIndex], projectIndex);
+      loadProjects(projects);
       toggleMenuSelect(e.target);
     } else {
       clearProjects();
-      loadProjects(projects);
+      loadProject(projects[tab], tab);
       toggleMenuSelect(e.target);
     }
   }
@@ -63,18 +65,26 @@ modalContentDiv.addEventListener('click', (e) => {
   // Guard clause, only element which should have impact are buttons
   if (!e.target.matches('.button')) return;
 
-  // Create todo item using form input data
-  const titleValue = document.getElementById('title').value;
-  const priorityValue = document.getElementById('priority').value;
-  const dueDateValue = document.getElementById('duedate').value;
-  const descriptionValue = document.getElementById('description').value;
-  const projectIndex = document.getElementById('project-index').value;
-  const todoItem = new Todo(titleValue, descriptionValue, dueDateValue, priorityValue);
+  if (e.target.innerText === 'Add todo') {
+    // Create todo item using form input data
+    const titleValue = document.getElementById('title').value;
+    const priorityValue = document.getElementById('priority').value;
+    const dueDateValue = document.getElementById('duedate').value;
+    const descriptionValue = document.getElementById('description').value;
+    const projectIndex = document.getElementById('project-index').value;
+    const todoItem = new Todo(titleValue, descriptionValue, dueDateValue, priorityValue);
 
-  modal.style.display = 'none';
+    // Add todo item to project todo list and refresh DOM
+    projects[projectIndex].addTodo(todoItem);
+    reloadProject(projects[projectIndex], projectIndex);
+  } else if (e.target.innerText === 'Add project') {
+    const titleValue = document.getElementById('title').value
+    const projectItem = project(titleValue);
 
-  // Add todo item to project todo list and refresh DOM
-  projects[projectIndex].addTodo(todoItem);
-  reloadProject(projects[projectIndex], projectIndex);
+    projects.push(projectItem)
+    loadMenu(projects);
+  }
+
   setObject('projects', projects); // Save projects object
+  modal.style.display = 'none'; // Close modal
 });

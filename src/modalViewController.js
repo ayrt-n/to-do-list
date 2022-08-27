@@ -31,6 +31,26 @@ const displayNewTodoModal = (projectIndex) => {
   modal.style.display = 'block';
 };
 
+// Display new project form in a modal
+const displayNewProjectModal = () => {
+  modalContent.innerHTML = '';
+  const projectForm = _createNewProjectModal();
+  modalContent.appendChild(projectForm);
+  modal.style.display = 'block';
+}
+
+const _createNewProjectModal = () => {
+  const projectTitle = _createTitleField();
+  const submitBtn = _createBtn('Add project');
+  const form = document.createElement('form');
+  form.id = 'new-project-form';
+
+  form.appendChild(projectTitle);
+  form.appendChild(submitBtn);
+
+  return form;
+};
+
 const _createNewTodoModal = (projectIndex) => {
   const todoTitle = _createTitleField();
   const todoPriority = _createPriorityField();
@@ -188,4 +208,5 @@ const _createHiddenProjectField = (projectIndex) => {
 export {
   displayTodoModal,
   displayNewTodoModal,
+  displayNewProjectModal
 };

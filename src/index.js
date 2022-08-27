@@ -23,7 +23,7 @@ menu.addEventListener('click', (e) => {
       toggleMenuSelect(e.target);
     } else {
       clearProjects();
-      loadAllProjects(projects);
+      loadProjects(projects);
       toggleMenuSelect(e.target);
     }
   }

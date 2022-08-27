@@ -1,14 +1,14 @@
 import Todo from "./todo";
 import project from "./project";
-import { loadMenu } from "./menuViewController";
+import { loadMenu, toggleMenuSelect } from "./menuViewController";
 import { displayTodoModal, displayNewTodoModal } from "./modalViewController";
-import { toggleTodoButton, loadProject, reloadProject, clearProjects } from "./todoViewController";
+import { toggleTodoButton, loadProject, loadProjects, reloadProject, clearProjects } from "./todoViewController";
 import { loadProjectsFromLocalStorage, setObject, getObject } from "./localStorage";
 
 // Load projects from local storage or generates new projects object
 const projects = loadProjectsFromLocalStorage();
 
-// By default load the inbox project 
+// By default load the project at index 0 (inbox) 
 loadMenu(projects);
 loadProject(projects[0], 0);
 
@@ -16,13 +16,16 @@ loadProject(projects[0], 0);
 menu.addEventListener('click', (e) => {
   if (e.target.matches('.menu-item')) {
     const projectIndex = e.target.getAttribute('project-index');
-    clearProjects();
-    loadProject(projects[projectIndex], projectIndex);
 
-    const prevSelect = document.querySelector('.menu-item.selected');
-    prevSelect.classList.remove('selected');
-
-    e.target.classList.add('selected');
+    if (projectIndex) {
+      clearProjects();
+      loadProject(projects[projectIndex], projectIndex);
+      toggleMenuSelect(e.target);
+    } else {
+      clearProjects();
+      loadAllProjects(projects);
+      toggleMenuSelect(e.target);
+    }
   }
 });
 

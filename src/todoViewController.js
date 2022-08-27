@@ -59,11 +59,21 @@ const reloadProject = (project, projectIndex) => {
 
 // Create project header with associated buttons
 const createProjectHeader = (project, projectIndex) => {
+  const projectHeaderDiv = document.createElement('div');
+  projectHeaderDiv.classList.add('project-header-container');
+
   const projectHeader = document.createElement('h1');
   projectHeader.innerHTML = project.name;
   projectHeader.setAttribute('project-index', projectIndex);
+  projectHeaderDiv.appendChild(projectHeader)
 
-  return projectHeader;
+  const trashIcon = document.createElement('img');
+  trashIcon.src = trashSvg;
+  trashIcon.classList.add('medium-icon', 'delete');
+
+  projectHeaderDiv.appendChild(trashIcon)
+
+  return projectHeaderDiv;
 }
 
 // Create radio button element for todo list item

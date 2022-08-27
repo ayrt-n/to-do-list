@@ -176,6 +176,12 @@ p {
 
 #content h1 {
   font-size: 2rem;
+}
+
+.project-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 1rem;
 }
 

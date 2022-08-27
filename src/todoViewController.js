@@ -15,7 +15,9 @@ const clearProjects = () => {
 
 // Create and display multiple projects given project object
 const loadProjects = (projectsObject) => {
-  
+  for (let i = 0; i < projectsObject.length; i++) {
+    loadProject(projectsObject[i], i);
+  }
 };
 
 // Create and display a project in the main content div
@@ -139,6 +141,7 @@ const createAddTaskButton = (projectIndex) => {
 
 export {
   loadProject,
+  loadProjects,
   reloadProject,
   clearProjects,
   toggleTodoButton

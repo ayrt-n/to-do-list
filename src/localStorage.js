@@ -6,26 +6,30 @@ const loadProjectsFromLocalStorage = () => {
   const localProjects = getObject('projects');
 
   if (localProjects) {
-    // Turn the parsed JSON projects object into a fully functioning list of projects with working functions
+    // Turn the parsed JSON projects object into a array of projects and todos
     result = createProjects(localProjects);
   } else {
-    // If no projects saved in local storage, create a new projects object and return
+    // If no projects saved in local storage, create a new projects array
     result = createNewProjectsObject();
   }
 
   return result;
 };
 
+// Iterate through the project attributes saved in localStorage and rebuild the project array
+// Should receive an array of project attributes in string form and will return array of project objects
 const createProjects = (projectsObject) => {
-  let projects = {};
+  let projects = [];
 
-  for (let project in projectsObject) {
-    projects[project] = createProject(projectsObject[project]);
+  for (let i = 0; i < projectsObject.length; i++) {
+    projects.push(createProject(projectsObject[i]));
   }
 
   return projects;
 };
 
+// Unable to store project methods in localStorage so need to recreate each project using the attributes
+// saved in localStorage and return the new project object 
 const createProject = (projectObject) => {
   const projectTmp = project(projectObject.name);
   const todosTmp = createTodoList(projectObject.todoList);
@@ -34,6 +38,8 @@ const createProject = (projectObject) => {
   return projectTmp;
 };
 
+// Unable to store todo methods in localStorage so need to recreate each todo using the attributes
+// saved in localStorage and return the new todo object
 const createTodoList = (todoList) => {
   const todoListTmp = [];
 
@@ -49,20 +55,23 @@ const createTodoList = (todoList) => {
   return todoListTmp
 };
 
+// Creates and returns a new projects array with empty default projects
 const createNewProjectsObject = () => {
-  let projects = {};
-  projects['inbox'] = project('Inbox');
-  projects['personal'] = project('Personal');
-  projects['work'] = project('Work');
+  let projects = [];
+  projects.push(project('Inbox'));
+  projects.push(project('Personal'));
+  projects.push(project('Work'));
 
   return projects;
 }
 
+// Save object to localStorage (requires object to be transformed to string)
 const setObject = (key, object) => {
   const objString = JSON.stringify(object);
   localStorage.setItem(key, objString);
 };
 
+// Retrieve object from localStorage (object must be parsed once loaded from localStorage)
 const getObject = (key) => {
   const objString = localStorage.getItem(key);
   return objString && JSON.parse(objString);

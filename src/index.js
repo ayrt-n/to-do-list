@@ -1,9 +1,8 @@
 import Todo from "./todo";
 import project from "./project";
-import { loadMenu } from "./menuController";
-import { loadProject, reloadProject, clearProjects } from "./loadTodos";
+import { loadMenu } from "./menuViewController";
 import { displayTodoModal, displayNewTodoModal } from "./modalViewController";
-import { toggleTodoButton } from "./todoViewController";
+import { toggleTodoButton, loadProject, reloadProject, clearProjects } from "./todoViewController";
 import { loadProjectsFromLocalStorage, setObject, getObject } from "./localStorage";
 
 // Load projects from local storage or generates new projects object
@@ -11,14 +10,14 @@ const projects = loadProjectsFromLocalStorage();
 
 // By default load the inbox project 
 loadMenu(projects);
-loadProject(projects['inbox']);
+loadProject(projects[0], 0);
 
 // Menu event listener
 menu.addEventListener('click', (e) => {
   if (e.target.matches('.menu-item')) {
-    const projectName = e.target.getAttribute('project-name');
+    const projectIndex = e.target.getAttribute('project-index');
     clearProjects();
-    loadProject(projects[projectName]);
+    loadProject(projects[projectIndex], projectIndex);
 
     const prevSelect = document.querySelector('.menu-item.selected');
     prevSelect.classList.remove('selected');
@@ -32,25 +31,25 @@ const mainContentDiv = document.getElementById('content');
 
 mainContentDiv.addEventListener('click', (e) => {
   // Guard clause if element selected is not a todo item
-  if (!e.target.hasAttribute('project')) return;
+  if (!e.target.hasAttribute('project-index')) return;
 
-  const projectName = e.target.getAttribute('project');
+  const projectIndex = e.target.getAttribute('project-index');
   const todoIndex = e.target.getAttribute('todo-index');
-  const todoItem = projects[projectName].getTodo(todoIndex);
+  const todoItem = projects[projectIndex].getTodo(todoIndex);
 
   // Event delegation to determine which task to run
   if (e.target.matches('.radio')) {
     toggleTodoButton(e.target); 
-    projects[projectName].toggleTodoStatus(todoIndex);
+    projects[projectIndex].toggleTodoStatus(todoIndex);
     setObject('projects', projects); // Save projects object
   } else if (e.target.matches('.title')) {
     displayTodoModal(todoItem);
   } else if (e.target.matches('.delete')) {
-    projects[projectName].removeTodo(todoIndex);
-    reloadProject(projects[projectName]);
+    projects[projectIndex].removeTodo(todoIndex);
+    reloadProject(projects[projectIndex], projectIndex);
     setObject('projects', projects); // Save projects object
   } else if (e.target.matches('.add-todo')) {
-    displayNewTodoModal(projectName);
+    displayNewTodoModal(projectIndex);
   }
 });
 
@@ -66,13 +65,13 @@ modalContentDiv.addEventListener('click', (e) => {
   const priorityValue = document.getElementById('priority').value;
   const dueDateValue = document.getElementById('duedate').value;
   const descriptionValue = document.getElementById('description').value;
-  const projectValue = document.getElementById('project').value;
+  const projectIndex = document.getElementById('project-index').value;
   const todoItem = new Todo(titleValue, descriptionValue, dueDateValue, priorityValue);
 
   modal.style.display = 'none';
 
   // Add todo item to project todo list and refresh DOM
-  projects[projectValue].addTodo(todoItem);
-  reloadProject(projects[projectValue]);
+  projects[projectIndex].addTodo(todoItem);
+  reloadProject(projects[projectIndex], projectIndex);
   setObject('projects', projects); // Save projects object
 });

@@ -19,7 +19,8 @@ const loadProjects = (projectsObject) => {
 };
 
 // Create and display a project in the main content div
-const loadProject = (project) => {
+// Should receive a project object
+const loadProject = (project, projectIndex) => {
   const header = document.createElement('h1');
   header.innerHTML = project.name;
   const todosDiv = document.createElement('div');
@@ -27,19 +28,19 @@ const loadProject = (project) => {
   todosDiv.appendChild(header);
   todosDiv.id = project.name.toLowerCase();
   
-  project.todoList.forEach((todo, index) => {
-    const todoListItem = createTodoListItem(todo, project, index);
+  project.todoList.forEach((todo, todoIndex) => {
+    const todoListItem = createTodoListItem(todo, projectIndex, todoIndex);
     todosDiv.appendChild(todoListItem);
   });
 
-  const addTask = createAddTaskButton(project);
+  const addTask = createAddTaskButton(projectIndex);
 
   todosDiv.appendChild(addTask);
   contentDiv.appendChild(todosDiv);
 };
 
 // Clear DOM and rebuild the given project in its containing div
-const reloadProject = (project) => {
+const reloadProject = (project, projectIndex) => {
   const projectDiv = document.getElementById(project.name.toLowerCase());
   projectDiv.innerHTML = '';
 
@@ -47,21 +48,21 @@ const reloadProject = (project) => {
   header.innerHTML = project.name;
   projectDiv.appendChild(header);
 
-  project.todoList.forEach((todo, index) => {
-    const todoListItem = createTodoListItem(todo, project, index);
+  project.todoList.forEach((todo, todoIndex) => {
+    const todoListItem = createTodoListItem(todo, projectIndex, todoIndex);
     projectDiv.appendChild(todoListItem);
   });
 
-  const addTask = createAddTaskButton(project);
+  const addTask = createAddTaskButton(projectIndex);
   projectDiv.appendChild(addTask);
 };
 
 // Create radio button element for todo list item
-const createRadioButton = (todo, project, index) => {
+const createRadioButton = (todo, projectIndex, todoIndex) => {
   const radioDiv = document.createElement('div');
   radioDiv.classList.add('radio');
-  radioDiv.setAttribute('todo-index', index);
-  radioDiv.setAttribute('project', project.name.toLowerCase());
+  radioDiv.setAttribute('todo-index', todoIndex);
+  radioDiv.setAttribute('project-index', projectIndex);
   
   if (todo.status === 1) {
     radioDiv.classList.add('selected');
@@ -71,15 +72,15 @@ const createRadioButton = (todo, project, index) => {
 };
 
 // Create div to display details of the todo list item
-const createTodoItem = (todo, project, index) => {
+const createTodoItem = (todo, projectIndex, todoIndex) => {
   const projectDetails = document.createElement('div');
   projectDetails.classList.add('project-details');
 
   const title = document.createElement('div');
   title.classList.add('title');
   title.innerHTML = todo.title;
-  title.setAttribute('project', project.name.toLowerCase());
-  title.setAttribute('todo-index', index);
+  title.setAttribute('project-index', projectIndex);
+  title.setAttribute('todo-index', todoIndex);
 
   const dueDate = document.createElement('div');
   dueDate.classList.add('due-date', 'sub-title');
@@ -92,24 +93,24 @@ const createTodoItem = (todo, project, index) => {
 };
 
 // Create trash icon for todo list item
-const createTrashIcon = (project, index) => {
+const createTrashIcon = (projectIndex, todoIndex) => {
   const trashIcon = document.createElement('img');
   trashIcon.src = trashSvg;
   trashIcon.classList.add('small-icon', 'delete');
-  trashIcon.setAttribute('todo-index', index);
-  trashIcon.setAttribute('project', project.name.toLowerCase());
+  trashIcon.setAttribute('todo-index', todoIndex);
+  trashIcon.setAttribute('project-index', projectIndex);
   
   return trashIcon;
 };
 
 // Create the complete todo list element for the DOM
-const createTodoListItem = (todo, project, index) => {
+const createTodoListItem = (todo, projectIndex, todoIndex) => {
   const todoDiv = document.createElement('div');
   todoDiv.classList.add('todo');
 
-  const radioButton = createRadioButton(todo, project, index);
-  const trashIcon = createTrashIcon(project, index);
-  const todoDetails = createTodoItem(todo, project, index);
+  const radioButton = createRadioButton(todo, projectIndex, todoIndex);
+  const trashIcon = createTrashIcon(projectIndex, todoIndex);
+  const todoDetails = createTodoItem(todo, projectIndex, todoIndex);
 
   todoDiv.appendChild(radioButton);
   todoDiv.appendChild(todoDetails);
@@ -119,10 +120,10 @@ const createTodoListItem = (todo, project, index) => {
 }
 
 // Create the add task button
-const createAddTaskButton = (project) => {
+const createAddTaskButton = (projectIndex) => {
   const addTodoDiv = document.createElement('div');
   addTodoDiv.classList.add('add-todo');
-  addTodoDiv.setAttribute('project', project.name.toLowerCase());
+  addTodoDiv.setAttribute('project-index', projectIndex);
 
   const plusDiv = document.createElement('div');
   plusDiv.classList.add('plus');

@@ -24,20 +24,20 @@ const displayTodoModal = (todo) => {
 };
 
 // Display new todo form in a modal
-const displayNewTodoModal = (projectName) => {
+const displayNewTodoModal = (projectIndex) => {
   modalContent.innerHTML = '';
-  const todoForm = _createNewTodoModal(projectName);
+  const todoForm = _createNewTodoModal(projectIndex);
   modalContent.appendChild(todoForm);
   modal.style.display = 'block';
 };
 
-const _createNewTodoModal = (project) => {
+const _createNewTodoModal = (projectIndex) => {
   const todoTitle = _createTitleField();
   const todoPriority = _createPriorityField();
   const todoDueDate = _createDueDateField();
   const todoDescription = _createDescriptionField();
   const submitBtn = _createBtn('Add todo');
-  const hiddenProjectInput = _createHiddenProjectField(project);
+  const hiddenProjectInput = _createHiddenProjectField(projectIndex);
 
   const form = document.createElement('form')
   form.id = 'new-todo-form';
@@ -176,11 +176,11 @@ const _createBtn = (buttonText) => {
   return fieldDiv;
 }
 
-const _createHiddenProjectField = (project) => {
+const _createHiddenProjectField = (projectIndex) => {
   const hiddenField = document.createElement('input');
   hiddenField.setAttribute('type', 'hidden');
-  hiddenField.value = project;
-  hiddenField.id = 'project';
+  hiddenField.value = projectIndex;
+  hiddenField.id = 'project-index';
 
   return hiddenField;
 }

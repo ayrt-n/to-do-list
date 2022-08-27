@@ -2,6 +2,7 @@ import inboxSVG from './images/inbox.svg';
 import calendarSVG from './images/inbox.svg';
 import chevronSVG from './images/chevron-down.svg';
 import circleSVG from './images/circle.svg';
+import plusSVG from './images/plus.svg';
 
 const burger = document.getElementById('burger');
 const menu = document.getElementById('menu');
@@ -11,21 +12,28 @@ burger.addEventListener('click', () => {
 });
 
 const loadMenu = (projectsObject) => {
+  menu.innerHTML = ''; 
+
   const inboxBtn = createMenuButton('Inbox', inboxSVG);
   inboxBtn.classList.add('selected');
-  inboxBtn.setAttribute('project-index', 0);
+  inboxBtn.setAttribute('menu-tab', 0);
 
   const projectsDiv = document.createElement('div');
   projectsDiv.classList.add('projects');
   const projectsBtn = createMenuButton('Projects', chevronSVG);
+  projectsBtn.setAttribute('menu-tab', 'all-projects');
   projectsDiv.appendChild(projectsBtn);
   
   for (let i = 1; i < projectsObject.length; i++) {
     const projectBtn = createMenuButton(projectsObject[i].name, circleSVG);
-    projectBtn.setAttribute('project-index', i)
+    projectBtn.setAttribute('menu-tab', i)
     projectBtn.classList.add('sub-item');
     projectsDiv.appendChild(projectBtn);
   }
+
+  const newProjectBtn = createMenuButton('Add project', plusSVG);
+  newProjectBtn.setAttribute('menu-tab', 'new-project');
+  projectsDiv.appendChild(newProjectBtn);
 
   menu.appendChild(inboxBtn);
   menu.appendChild(projectsDiv);

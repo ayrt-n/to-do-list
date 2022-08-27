@@ -86,5 +86,5 @@ modalContentDiv.addEventListener('click', (e) => {
   }
 
   setObject('projects', projects); // Save projects object
-  modal.style.display = 'none'; // Close modal
+  modal.classList.remove('active'); // Close modal
 });

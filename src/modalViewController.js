@@ -6,13 +6,13 @@ const closeModalBtn = document.getElementById('close-modal');
 // Close modal if window clicked
 window.onclick = (e) => {
   if (e.target === modal) {
-    modal.style.display = 'none';
+    modal.classList.remove('active');
   }
 }
 
 // Close modal if close button is clicked
 closeModalBtn.onclick = () => {
-  modal.style.display = 'none';
+  modal.classList.remove('active');
 }
 
 // Display more detail modal given a todo object
@@ -20,7 +20,7 @@ const displayTodoModal = (todo) => {
   modalContent.innerHTML = '';
   const todoModal = _createTodoModal(todo);
   modalContent.appendChild(todoModal);
-  modal.style.display = 'block';
+  modal.classList.add('active');
 };
 
 // Display new todo form in a modal
@@ -28,7 +28,7 @@ const displayNewTodoModal = (projectIndex) => {
   modalContent.innerHTML = '';
   const todoForm = _createNewTodoModal(projectIndex);
   modalContent.appendChild(todoForm);
-  modal.style.display = 'block';
+  modal.classList.add('active');
 };
 
 // Display new project form in a modal
@@ -36,7 +36,7 @@ const displayNewProjectModal = () => {
   modalContent.innerHTML = '';
   const projectForm = _createNewProjectModal();
   modalContent.appendChild(projectForm);
-  modal.style.display = 'block';
+  modal.classList.add('active');
 }
 
 const _createNewProjectModal = () => {

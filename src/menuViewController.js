@@ -31,6 +31,16 @@ const loadMenu = (projectsObject) => {
   menu.appendChild(projectsDiv);
 };
 
+// Toggles which menu item is displayed as selected. Should receive the target menu item element as input
+const toggleMenuSelect = (menuItem) => {
+  // Remove select from the previously selected element
+  const prevSelect = document.querySelector('.menu-item.selected');
+  if (prevSelect) { prevSelect.classList.remove('selected'); }
+
+  // Toggle menu item selected
+  menuItem.classList.add('selected');
+};
+
 const createMenuButton = (text, icon) => {
   const menuItem = document.createElement('div');
   menuItem.classList.add('menu-item');
@@ -47,5 +57,6 @@ const createMenuButton = (text, icon) => {
 };
 
 export {
-  loadMenu
+  loadMenu,
+  toggleMenuSelect
 };

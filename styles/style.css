@@ -270,6 +270,7 @@ p {
 .modal {
   display: none;
   position: fixed;
+  overflow-y: auto;
   z-index: 50;
   left: 0;
   top: 0;
@@ -278,27 +279,37 @@ p {
   background-color: rgba(0,0,0,0.4);
 }
 
+.modal.active {
+  display: block;
+}
+
 .modal-card {
   background-color: var(--black-50);
-  margin: 5rem auto;
+  margin: 2rem auto;
   padding: 20px;
-  border: 1px solid #888;
   border-radius: 6px;
   width: 80%;
   max-width: 900px;
 }
 
+.modal-header {
+  margin-bottom: 1rem;
+}
+
 .close {
-  color: #aaa;
-  text-align: right;
+  margin-left: auto;
+  width: 2rem;
+  height: 2rem;
+  box-sizing: border-box;
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 300;
+  text-align: center;
 }
 
 .close:hover,
 .close:focus {
-  color: var(--black-900);
-  text-decoration: none;
+  background-color: var(--black-200);
+  border-radius: 6px;
   cursor: pointer;
 }
 

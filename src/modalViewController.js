@@ -1,5 +1,4 @@
 const modal = document.getElementById('modal');
-const modalCard = document.getElementsByClassName('modal-card')[0];
 const modalContent = document.getElementsByClassName('modal-content')[0];
 const closeModalBtn = document.getElementById('close-modal');
 
@@ -74,19 +73,19 @@ const _createNewTodoModal = (projectIndex) => {
 
 // Create more details modal and append to modal content div
 const _createTodoModal = (todo) => {
-  const header = document.createElement('h1');
-  header.innerHTML = todo.title
-
+  const todoTitle = _createModalTextSection('Todo', todo.title);
   const priority = _createModalTextSection('Priority', todo.priority);
   const dueDate = _createModalTextSection('Due date', todo.dueDate);
   const description = _createModalTextSection('Description', todo.description);
+  const editBtn = _createBtn('Edit todo');
 
   const div = document.createElement('div');
 
-  div.appendChild(header);
+  div.appendChild(todoTitle);
   div.appendChild(priority);
   div.appendChild(dueDate);
   div.appendChild(description);
+  div.appendChild(editBtn);
 
   return div;
 };
@@ -94,13 +93,14 @@ const _createTodoModal = (todo) => {
 // Create a standard modal text element with title and text content
 const _createModalTextSection = (title, content) => {
   const div = document.createElement('div');
+  div.classList.add('field');
 
   const sectionTitle = document.createElement('p');
-  sectionTitle.classList.add('title');
-  sectionTitle.innerHTML = title;
+  sectionTitle.classList.add('label');
+  sectionTitle.textContent = title;
 
   const sectionContent = document.createElement('p');
-  sectionContent.innerHTML = content
+  sectionContent.textContent = content;
 
   div.appendChild(sectionTitle);
   div.appendChild(sectionContent);
@@ -135,9 +135,12 @@ const _createPriorityField = () => {
   priorityLabel.setAttribute('for', 'priority');
   priorityLabel.classList.add('label');
   priorityLabel.innerHTML = 'Priority';
+  const controlDiv = document.createElement('div');
+  controlDiv.classList.add('control');
+  const selectDiv = document.createElement('div');
+  selectDiv.classList.add('select');
   const priorityInput = document.createElement('select');
   priorityInput.id = 'priority';
-  priorityInput.classList.add('select');
   for (let i = 0; i < priorityOptions.length; i++) {
     const priorityOption = document.createElement('option');
     priorityOption.value = priorityOptions[i];
@@ -145,8 +148,11 @@ const _createPriorityField = () => {
     priorityInput.appendChild(priorityOption);
   }
 
+  selectDiv.appendChild(priorityInput);
+  controlDiv.appendChild(selectDiv);
+
   priorityDiv.appendChild(priorityLabel);
-  priorityDiv.appendChild(priorityInput);
+  priorityDiv.appendChild(controlDiv);
 
   return priorityDiv;
 };
@@ -158,12 +164,20 @@ const _createDueDateField = () => {
   dueDateLabel.setAttribute('for', 'duedate');
   dueDateLabel.classList.add('label');
   dueDateLabel.innerHTML = 'Due date';
+  const controlDiv = document.createElement('div');
+  controlDiv.classList.add('control');
+  const dateDiv = document.createElement('div');
+  dateDiv.classList.add('date');
   const dueDateInput = document.createElement('input');
   dueDateInput.id = 'duedate';
   dueDateInput.setAttribute('type', 'date');
+  dueDateInput.setAttribute('max', '9999-12-31');
+
+  dateDiv.appendChild(dueDateInput);
+  controlDiv.appendChild(dateDiv);
 
   dueDateDiv.appendChild(dueDateLabel);
-  dueDateDiv.appendChild(dueDateInput);
+  dueDateDiv.appendChild(controlDiv);
 
   return dueDateDiv;
 };

@@ -1,4 +1,5 @@
 import inboxSVG from './images/inbox.svg';
+import agendaSVG from './images/agenda.svg';
 import calendarSVG from './images/inbox.svg';
 import chevronSVG from './images/chevron-down.svg';
 import circleSVG from './images/circle.svg';
@@ -20,7 +21,7 @@ const loadMenu = (projectsObject) => {
 
   const projectsDiv = document.createElement('div');
   projectsDiv.classList.add('projects');
-  const projectsBtn = createMenuButton('Projects', chevronSVG);
+  const projectsBtn = createMenuButton('Projects', agendaSVG);
   projectsBtn.setAttribute('menu-tab', 'all-projects');
   projectsDiv.appendChild(projectsBtn);
   

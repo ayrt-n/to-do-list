@@ -458,6 +458,7 @@ input, textarea, select {
   min-width: 100%;
   padding: calc(0.75em - 1px);
   resize: vertical;
+  font: inherit;
 }
 
 .textarea:not([rows]) {

@@ -27,7 +27,7 @@ const displayTodoModal = (todo) => {
 // Display new todo form in a modal
 const displayNewTodoModal = (projectIndex) => {
   modalContent.innerHTML = '';
-  modalHeader.innerHTML = 'Create new todo';
+  modalHeader.innerHTML = 'New todo';
   const todoForm = _createNewTodoModal(projectIndex);
   modalContent.appendChild(todoForm);
   modal.classList.add('active');
@@ -36,7 +36,7 @@ const displayNewTodoModal = (projectIndex) => {
 // Display new project form in a modal
 const displayNewProjectModal = () => {
   modalContent.innerHTML = '';
-  modalHeader.innerHTML = 'Create new project';
+  modalHeader.innerHTML = 'New project';
   const projectForm = _createNewProjectModal();
   modalContent.appendChild(projectForm);
   modal.classList.add('active');

@@ -292,8 +292,14 @@ p {
   max-width: 900px;
 }
 
-.modal-header {
+.modal-header-container {
+  display: flex;
+  align-items: center;
   margin-bottom: 1rem;
+}
+
+.modal-content p {
+  min-height: 1.5rem;
 }
 
 .close {
@@ -315,6 +321,11 @@ p {
 
 .modal-card h1 {
   font-size: 2rem;
+}
+
+.modal-content {
+  margin-right: 1rem;
+  margin-left: 1rem;
 }
 
 /* Bulma Form Styling from https://github.com/jgthms/bulma/blob/master/css/bulma.css  */

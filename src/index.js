@@ -39,29 +39,31 @@ const mainContentDiv = document.getElementById('content');
 
 mainContentDiv.addEventListener('click', (e) => {
   // Guard clause if element selected is not a todo item
-  if (!e.target.hasAttribute('project-index')) return;
+  let projectElem = e.target.closest('[project-index]')
 
-  const projectIndex = e.target.getAttribute('project-index');
-  const todoIndex = e.target.getAttribute('todo-index');
+  if (!projectElem) return;
+
+  const projectIndex = projectElem.getAttribute('project-index');
+  const todoIndex = projectElem.getAttribute('todo-index');
   const todoItem = projects[projectIndex].getTodo(todoIndex);
 
   // Determine what action to perform based on element clicked
-  if (e.target.matches('.radio')) {
+  if (projectElem.matches('.radio')) {
     // If radio button, toggle radio button and toggle status of the todo and save
     toggleTodoButton(e.target); 
     projects[projectIndex].toggleTodoStatus(todoIndex);
     setObject('projects', projects);
-  } else if (e.target.matches('.title')) {
+  } else if (projectElem.matches('.project-details')) {
     // If title, display modal with full todo details
     displayTodoModal(todoItem);
-  } else if (e.target.matches('.delete')) {
+  } else if (projectElem.matches('.delete')) {
     // If delete icon, prompt user to confirm deletion and then delete and save if accepted
     if (confirm('Are you sure you want to delete this item?') === true) {
       projects[projectIndex].removeTodo(todoIndex);
       reloadProject(projects[projectIndex], projectIndex);
       setObject('projects', projects);
     }
-  } else if (e.target.matches('.add-todo')) {
+  } else if (projectElem.matches('.add-todo')) {
     // If add todo button, display modal with form to add new todo
     displayNewTodoModal(projectIndex);
   }

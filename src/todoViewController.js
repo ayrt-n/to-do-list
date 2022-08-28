@@ -14,7 +14,8 @@ const clearProjects = () => {
 };
 
 // Create and display multiple projects given project array
-const loadProjects = (projectsObject) => {
+// Projects start at index 1 to skip general inbox
+const loadAllProjects = (projectsObject) => {
   for (let i = 1; i < projectsObject.length; i++) {
     loadProject(projectsObject[i], i);
   }
@@ -75,6 +76,7 @@ const createRadioButton = (todo, projectIndex, todoIndex) => {
   radioDiv.classList.add('radio');
   radioDiv.setAttribute('todo-index', todoIndex);
   radioDiv.setAttribute('project-index', projectIndex);
+  radioDiv.setAttribute('data-action', 'toggleTodoStatus');
   
   if (todo.status === 1) {
     radioDiv.classList.add('selected');
@@ -89,6 +91,7 @@ const createTodoItem = (todo, projectIndex, todoIndex) => {
   projectDetails.classList.add('project-details');
   projectDetails.setAttribute('project-index', projectIndex);
   projectDetails.setAttribute('todo-index', todoIndex);
+  projectDetails.setAttribute('data-action', 'viewTodoDetails');
 
   const title = document.createElement('div');
   title.classList.add('title');
@@ -111,6 +114,7 @@ const createTrashIcon = (projectIndex, todoIndex) => {
   trashIcon.classList.add('small-icon', 'delete');
   trashIcon.setAttribute('todo-index', todoIndex);
   trashIcon.setAttribute('project-index', projectIndex);
+  trashIcon.setAttribute('data-action', 'deleteTodo');
   
   return trashIcon;
 };
@@ -136,6 +140,7 @@ const createAddTaskButton = (projectIndex) => {
   const addTodoDiv = document.createElement('div');
   addTodoDiv.classList.add('add-todo');
   addTodoDiv.setAttribute('project-index', projectIndex);
+  addTodoDiv.setAttribute('data-action', 'displayNewTodoModal');
 
   const plusDiv = document.createElement('div');
   plusDiv.classList.add('plus');
@@ -151,7 +156,7 @@ const createAddTaskButton = (projectIndex) => {
 
 export {
   loadProject,
-  loadProjects,
+  loadAllProjects,
   reloadProject,
   clearProjects,
   toggleTodoButton

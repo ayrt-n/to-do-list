@@ -14,20 +14,23 @@ loadProject(projects[0], 0);
 
 // Menu event listener
 menu.addEventListener('click', (e) => {
-  if (e.target.matches('.menu-item')) {
-    const tab = e.target.getAttribute('menu-tab');
+  // Guard clause to check if target is a menu-item
+  let menuItem = e.target.closest('.menu-item');
+  if (!menuItem) return;
+  if (!menu.contains(menuItem)) return;
 
-    if (tab === 'new-project') {
-      displayNewProjectModal();
-    } else if (tab === 'all-projects') {
-      clearProjects();
-      loadProjects(projects);
-      toggleMenuSelect(e.target);
-    } else {
-      clearProjects();
-      loadProject(projects[tab], tab);
-      toggleMenuSelect(e.target);
-    }
+  const tab = menuItem.getAttribute('menu-tab');
+
+  if (tab === 'new-project') {
+    displayNewProjectModal();
+  } else if (tab === 'all-projects') {
+    clearProjects();
+    loadProjects(projects);
+    toggleMenuSelect(menuItem);
+  } else {
+    clearProjects();
+    loadProject(projects[tab], tab);
+    toggleMenuSelect(menuItem);
   }
 });
 
@@ -42,20 +45,24 @@ mainContentDiv.addEventListener('click', (e) => {
   const todoIndex = e.target.getAttribute('todo-index');
   const todoItem = projects[projectIndex].getTodo(todoIndex);
 
-  // Event delegation to determine which task to run
+  // Determine what action to perform based on element clicked
   if (e.target.matches('.radio')) {
+    // If radio button, toggle radio button and toggle status of the todo and save
     toggleTodoButton(e.target); 
     projects[projectIndex].toggleTodoStatus(todoIndex);
-    setObject('projects', projects); // Save projects object
+    setObject('projects', projects);
   } else if (e.target.matches('.title')) {
+    // If title, display modal with full todo details
     displayTodoModal(todoItem);
   } else if (e.target.matches('.delete')) {
+    // If delete icon, prompt user to confirm deletion and then delete and save if accepted
     if (confirm('Are you sure you want to delete this item?') === true) {
       projects[projectIndex].removeTodo(todoIndex);
       reloadProject(projects[projectIndex], projectIndex);
-      setObject('projects', projects); // Save projects object
+      setObject('projects', projects);
     }
   } else if (e.target.matches('.add-todo')) {
+    // If add todo button, display modal with form to add new todo
     displayNewTodoModal(projectIndex);
   }
 });
@@ -69,18 +76,18 @@ modalContentDiv.addEventListener('click', (e) => {
 
   e.preventDefault(); // Stop button from submitting
   
+  // If button is to add new todo, create new todo, add to project object, and refresh the projects view
   if (e.target.innerText === 'Add todo') {
-    // Create todo item using form input data
-    const titleValue = document.getElementById('title').value;
-    const priorityValue = document.getElementById('priority').value;
-    const dueDateValue = document.getElementById('duedate').value;
-    const descriptionValue = document.getElementById('description').value;
-    const projectIndex = document.getElementById('project-index').value;
-    const todoItem = new Todo(titleValue, descriptionValue, dueDateValue, priorityValue);
+    const todoItem = new Todo(document.getElementById('title').value,
+                              document.getElementById('description').value,
+                              document.getElementById('duedate').value,
+                              document.getElementById('priority').value);
 
-    // Add todo item to project todo list and refresh DOM
+    const projectIndex = document.getElementById('project-index').value;
     projects[projectIndex].addTodo(todoItem);
     reloadProject(projects[projectIndex], projectIndex);
+
+  // Else if button is to add new project, create a new project, add to project object, and refresh the menu view
   } else if (e.target.innerText === 'Add project') {
     const titleValue = document.getElementById('title').value
     const projectItem = project(titleValue);

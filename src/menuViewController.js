@@ -12,6 +12,12 @@ burger.addEventListener('click', () => {
   menu.classList.toggle('is-hidden');
 });
 
+menu.addEventListener('click', (e) => {
+  if (e.target.matches('.menu-item')) {
+    menu.classList.add('is-hidden');
+  }
+});
+
 const loadMenu = (projectsObject) => {
   menu.innerHTML = ''; 
 

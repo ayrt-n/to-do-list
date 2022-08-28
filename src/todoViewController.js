@@ -13,7 +13,7 @@ const clearProjects = () => {
   contentDiv.innerHTML = '';
 };
 
-// Create and display multiple projects given project object
+// Create and display multiple projects given project array
 const loadProjects = (projectsObject) => {
   for (let i = 1; i < projectsObject.length; i++) {
     loadProject(projectsObject[i], i);
@@ -87,12 +87,12 @@ const createRadioButton = (todo, projectIndex, todoIndex) => {
 const createTodoItem = (todo, projectIndex, todoIndex) => {
   const projectDetails = document.createElement('div');
   projectDetails.classList.add('project-details');
+  projectDetails.setAttribute('project-index', projectIndex);
+  projectDetails.setAttribute('todo-index', todoIndex);
 
   const title = document.createElement('div');
   title.classList.add('title');
   title.innerHTML = todo.title;
-  title.setAttribute('project-index', projectIndex);
-  title.setAttribute('todo-index', todoIndex);
 
   const dueDate = document.createElement('div');
   dueDate.classList.add('due-date', 'sub-title');

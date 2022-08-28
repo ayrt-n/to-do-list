@@ -64,14 +64,7 @@ const createProjectHeader = (project, projectIndex) => {
 
   const projectHeader = document.createElement('h1');
   projectHeader.innerHTML = project.name;
-  projectHeader.setAttribute('project-index', projectIndex);
   projectHeaderDiv.appendChild(projectHeader)
-
-  const trashIcon = document.createElement('img');
-  trashIcon.src = trashSvg;
-  trashIcon.classList.add('medium-icon', 'delete');
-
-  projectHeaderDiv.appendChild(trashIcon)
 
   return projectHeaderDiv;
 }

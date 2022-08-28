@@ -1,5 +1,6 @@
 const modal = document.getElementById('modal');
 const modalContent = document.getElementsByClassName('modal-content')[0];
+const modalHeader = document.getElementsByClassName('modal-header')[0];
 const closeModalBtn = document.getElementById('close-modal');
 
 // Close modal if window clicked
@@ -17,6 +18,7 @@ closeModalBtn.onclick = () => {
 // Display more detail modal given a todo object
 const displayTodoModal = (todo) => {
   modalContent.innerHTML = '';
+  modalHeader.innerHTML = 'Todo details';
   const todoModal = _createTodoModal(todo);
   modalContent.appendChild(todoModal);
   modal.classList.add('active');
@@ -25,6 +27,7 @@ const displayTodoModal = (todo) => {
 // Display new todo form in a modal
 const displayNewTodoModal = (projectIndex) => {
   modalContent.innerHTML = '';
+  modalHeader.innerHTML = 'Create new todo';
   const todoForm = _createNewTodoModal(projectIndex);
   modalContent.appendChild(todoForm);
   modal.classList.add('active');
@@ -33,6 +36,7 @@ const displayNewTodoModal = (projectIndex) => {
 // Display new project form in a modal
 const displayNewProjectModal = () => {
   modalContent.innerHTML = '';
+  modalHeader.innerHTML = 'Create new project';
   const projectForm = _createNewProjectModal();
   modalContent.appendChild(projectForm);
   modal.classList.add('active');
@@ -65,8 +69,8 @@ const _createNewTodoModal = (projectIndex) => {
   form.appendChild(todoPriority);
   form.appendChild(todoDueDate);
   form.appendChild(todoDescription);
-  form.appendChild(submitBtn);
   form.appendChild(hiddenProjectInput);
+  form.appendChild(submitBtn);
 
   return form;
 };

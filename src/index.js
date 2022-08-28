@@ -50,9 +50,11 @@ mainContentDiv.addEventListener('click', (e) => {
   } else if (e.target.matches('.title')) {
     displayTodoModal(todoItem);
   } else if (e.target.matches('.delete')) {
-    projects[projectIndex].removeTodo(todoIndex);
-    reloadProject(projects[projectIndex], projectIndex);
-    setObject('projects', projects); // Save projects object
+    if (confirm('Are you sure you want to delete this item?') === true) {
+      projects[projectIndex].removeTodo(todoIndex);
+      reloadProject(projects[projectIndex], projectIndex);
+      setObject('projects', projects); // Save projects object
+    }
   } else if (e.target.matches('.add-todo')) {
     displayNewTodoModal(projectIndex);
   }

@@ -2,7 +2,7 @@ import Todo from "./todo";
 import project from "./project";
 import { loadMenu, toggleMenuSelect } from "./menuViewController";
 import { displayTodoModal, displayNewTodoModal, displayNewProjectModal } from "./modalViewController";
-import { toggleTodoButton, loadProject, loadProjects, reloadProject, clearProjects } from "./todoViewController";
+import { toggleTodoButton, loadProject, loadAllProjects, reloadProject, clearProjects } from "./todoViewController";
 import { loadProjectsFromLocalStorage, setObject, getObject } from "./localStorage";
 
 // Load projects from local storage or generates new projects object
@@ -19,17 +19,18 @@ menu.addEventListener('click', (e) => {
   if (!menuItem) return;
   if (!menu.contains(menuItem)) return;
 
-  const tab = menuItem.getAttribute('menu-tab');
+  const menuAction = menuItem.getAttribute('data-action');
 
-  if (tab === 'new-project') {
+  if (menuAction === 'displayNewProjectModal') {
     displayNewProjectModal();
-  } else if (tab === 'all-projects') {
+  } else if (menuAction === 'loadAllProjects') {
     clearProjects();
-    loadProjects(projects);
+    loadAllProjects(projects);
     toggleMenuSelect(menuItem);
-  } else {
+  } else if (menuAction === 'loadProject') {
+    const projectIndex = menuItem.getAttribute('project-index');
     clearProjects();
-    loadProject(projects[tab], tab);
+    loadProject(projects[projectIndex], projectIndex);
     toggleMenuSelect(menuItem);
   }
 });
@@ -40,7 +41,6 @@ const mainContentDiv = document.getElementById('content');
 mainContentDiv.addEventListener('click', (e) => {
   // Guard clause if element selected is not a todo item
   let projectElem = e.target.closest('[project-index]')
-
   if (!projectElem) return;
 
   const projectIndex = projectElem.getAttribute('project-index');

@@ -65,6 +65,8 @@ modalContentDiv.addEventListener('click', (e) => {
   // Guard clause, only element which should have impact are buttons
   if (!e.target.matches('.button')) return;
 
+  e.preventDefault(); // Stop button from submitting
+  
   if (e.target.innerText === 'Add todo') {
     // Create todo item using form input data
     const titleValue = document.getElementById('title').value;

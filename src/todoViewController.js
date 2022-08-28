@@ -15,7 +15,7 @@ const clearProjects = () => {
 
 // Create and display multiple projects given project object
 const loadProjects = (projectsObject) => {
-  for (let i = 0; i < projectsObject.length; i++) {
+  for (let i = 1; i < projectsObject.length; i++) {
     loadProject(projectsObject[i], i);
   }
 };

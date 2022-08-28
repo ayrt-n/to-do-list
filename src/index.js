@@ -21,17 +21,21 @@ menu.addEventListener('click', (e) => {
 
   const menuAction = menuItem.getAttribute('data-action');
 
-  if (menuAction === 'displayNewProjectModal') {
-    displayNewProjectModal();
-  } else if (menuAction === 'loadAllProjects') {
-    clearProjects();
-    loadAllProjects(projects);
-    toggleMenuSelect(menuItem);
-  } else if (menuAction === 'loadProject') {
-    const projectIndex = menuItem.getAttribute('project-index');
-    clearProjects();
-    loadProject(projects[projectIndex], projectIndex);
-    toggleMenuSelect(menuItem);
+  switch (menuAction) {
+    case 'displayNewProjectModal':
+      displayNewProjectModal();
+      break;
+    case 'loadAllProjects':
+      clearProjects();
+      loadAllProjects(projects);
+      toggleMenuSelect(menuItem);
+      break;
+    case 'loadProject':
+      const projectIndex = menuItem.getAttribute('project-index');
+      clearProjects();
+      loadProject(projects[projectIndex], projectIndex);
+      toggleMenuSelect(menuItem);
+      break;
   }
 });
 

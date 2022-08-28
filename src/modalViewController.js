@@ -206,7 +206,7 @@ const _createDescriptionField = () => {
 const _createBtn = (buttonText) => {
   const fieldDiv = document.createElement('div');
   fieldDiv.classList.add('field')
-  const button = document.createElement('a');
+  const button = document.createElement('button');
   button.classList.add('button');
   button.innerHTML = buttonText;
 

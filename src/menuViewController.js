@@ -23,23 +23,25 @@ const loadMenu = (projectsObject) => {
 
   const inboxBtn = createMenuButton('Inbox', inboxSVG);
   inboxBtn.classList.add('selected');
-  inboxBtn.setAttribute('menu-tab', 0);
+  inboxBtn.setAttribute('data-action', 'loadProject');
+  inboxBtn.setAttribute('project-index', 0);
 
   const projectsDiv = document.createElement('div');
   projectsDiv.classList.add('projects');
   const projectsBtn = createMenuButton('Projects', agendaSVG);
-  projectsBtn.setAttribute('menu-tab', 'all-projects');
+  projectsBtn.setAttribute('data-action', 'loadAllProjects');
   projectsDiv.appendChild(projectsBtn);
   
   for (let i = 1; i < projectsObject.length; i++) {
     const projectBtn = createMenuButton(projectsObject[i].name, circleSVG);
-    projectBtn.setAttribute('menu-tab', i)
+    projectBtn.setAttribute('data-action', 'loadProject');
+    projectBtn.setAttribute('project-index', i)
     projectBtn.classList.add('sub-item');
     projectsDiv.appendChild(projectBtn);
   }
 
   const newProjectBtn = createMenuButton('Add project', plusSVG);
-  newProjectBtn.setAttribute('menu-tab', 'new-project');
+  newProjectBtn.setAttribute('data-action', 'displayNewProjectModal');
   projectsDiv.appendChild(newProjectBtn);
 
   menu.appendChild(inboxBtn);

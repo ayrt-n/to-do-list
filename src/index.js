@@ -46,24 +46,25 @@ mainContentDiv.addEventListener('click', (e) => {
   const projectIndex = projectElem.getAttribute('project-index');
   const todoIndex = projectElem.getAttribute('todo-index');
   const todoItem = projects[projectIndex].getTodo(todoIndex);
+  const dataAction = projectElem.getAttribute('data-action');
 
   // Determine what action to perform based on element clicked
-  if (projectElem.matches('.radio')) {
+  if (dataAction === 'toggleTodoStatus') {
     // If radio button, toggle radio button and toggle status of the todo and save
-    toggleTodoButton(e.target); 
-    projects[projectIndex].toggleTodoStatus(todoIndex);
+    toggleTodoButton(projectElem); 
+    todoItem.toggleStatus();
     setObject('projects', projects);
-  } else if (projectElem.matches('.project-details')) {
+  } else if (dataAction === 'viewTodoDetails') {
     // If title, display modal with full todo details
     displayTodoModal(todoItem);
-  } else if (projectElem.matches('.delete')) {
+  } else if (dataAction === 'deleteTodo') {
     // If delete icon, prompt user to confirm deletion and then delete and save if accepted
     if (confirm('Are you sure you want to delete this item?') === true) {
       projects[projectIndex].removeTodo(todoIndex);
       reloadProject(projects[projectIndex], projectIndex);
       setObject('projects', projects);
     }
-  } else if (projectElem.matches('.add-todo')) {
+  } else if (dataAction === 'displayNewTodoModal') {
     // If add todo button, display modal with form to add new todo
     displayNewTodoModal(projectIndex);
   }

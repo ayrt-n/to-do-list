@@ -324,8 +324,8 @@ p {
 }
 
 .modal-content {
-  margin-right: 1rem;
-  margin-left: 1rem;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
 }
 
 /* Bulma Form Styling from https://github.com/jgthms/bulma/blob/master/css/bulma.css  */

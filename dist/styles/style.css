@@ -368,7 +368,7 @@ input, textarea, select {
   background-color: var(--primary-500);
 }
 
-.button:active {
+.button:active, .button:focus {
   background-color: var(--primary-700);
 }
 

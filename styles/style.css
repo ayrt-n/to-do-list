@@ -221,6 +221,7 @@ p {
 .project-details {
   margin-right: auto;
   cursor: pointer;
+  flex-grow: 1;
 }
 
 .todo .title {

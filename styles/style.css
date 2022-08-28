@@ -500,3 +500,7 @@ input, textarea, select {
   border-color: #363636;
 }
 
+.date input[type="date"] {
+  font: inherit;
+}
+

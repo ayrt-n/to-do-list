@@ -1,7 +1,7 @@
 import Todo from "./todo";
 import project from "./project";
 import { loadMenu, toggleMenuSelect } from "./menuViewController";
-import { displayTodoModal, displayNewTodoModal, displayNewProjectModal, displayEditTodoModal } from "./modalViewController";
+import { displayTodoModal, displayTodoFormModal, displayNewProjectModal } from "./modalViewController";
 import { toggleTodoButton, loadProject, loadAllProjects, reloadProject, clearProjects } from "./todoViewController";
 import { loadProjectsFromLocalStorage, setObject } from "./localStorage";
 
@@ -73,7 +73,7 @@ mainContentDiv.addEventListener('click', (e) => {
       break;
     case 'displayNewTodoModal':
       // Display modal with form to add new todo
-      displayNewTodoModal(projectIndex);
+      displayTodoFormModal('New todo', {}, projectIndex);
       break;
   }
 });
@@ -89,12 +89,13 @@ modalContentDiv.addEventListener('click', (e) => {
   
   // If button is to add new todo, create new todo, add to project object, and refresh the projects view
   if (e.target.innerText === 'Add todo') {
+    const form = e.target.closest('form');
+    const projectIndex = form.getAttribute('project-index');
     const todoItem = new Todo(document.getElementById('title').value,
                               document.getElementById('description').value,
                               document.getElementById('duedate').value,
                               document.getElementById('priority').value);
 
-    const projectIndex = document.getElementById('project-index').value;
     projects[projectIndex].addTodo(todoItem);
     reloadProject(projects[projectIndex], projectIndex);
   // Else if button is to add new project, create a new project, add to project object, and refresh the menu view
@@ -110,7 +111,7 @@ modalContentDiv.addEventListener('click', (e) => {
     const todoIndex = editDiv.getAttribute('todo-index');
 
     const todoItem = projects[projectIndex].getTodo(todoIndex);
-    displayEditTodoModal(todoItem, projectIndex, todoIndex);
+    displayTodoFormModal('Edit todo', todoItem, projectIndex, todoIndex);
   } else if (e.target.innerText === 'Save changes') {
     const form = e.target.closest('form');
     const todoIndex = form.getAttribute('todo-index');
@@ -121,6 +122,8 @@ modalContentDiv.addEventListener('click', (e) => {
                                     document.getElementById('description').value,
                                     document.getElementById('duedate').value,
                                     document.getElementById('priority').value)
+
+    reloadProject(projects[projectIndex], projectIndex);
   }
 
   setObject('projects', projects); // Save projects object

@@ -15,11 +15,20 @@ closeModalBtn.onclick = () => {
   modal.classList.remove('active');
 }
 
+// Close modal on button click/submit
+modalContent.addEventListener('click', (e) => {
+  if (e.target.matches('.button')) {
+    modal.classList.remove('active');
+  }
+});
+
 // Display more detail modal given a todo object
-const displayTodoModal = (todo) => {
+const displayTodoModal = (todo, projectIndex, todoIndex) => {
   modalContent.innerHTML = '';
   modalHeader.innerHTML = 'Todo details';
   const todoModal = _createTodoModal(todo);
+  todoModal.setAttribute('project-index', projectIndex);
+  todoModal.setAttribute('todo-index', todoIndex);
   modalContent.appendChild(todoModal);
   modal.classList.add('active');
 };
@@ -30,6 +39,26 @@ const displayNewTodoModal = (projectIndex) => {
   modalHeader.innerHTML = 'New todo';
   const todoForm = _createNewTodoModal(projectIndex);
   modalContent.appendChild(todoForm);
+  modal.classList.add('active');
+};
+
+const displayEditTodoModal = (todo, projectIndex, todoIndex) => {
+  modalContent.innerHTML = '';
+  modalHeader.innerHTML = 'Edit todo';
+  const editForm = _createNewTodoModal(projectIndex);
+  editForm.querySelector('#title').value = todo.title;
+  editForm.querySelector('#priority').value = todo.priority;
+  editForm.querySelector('#duedate').value = todo.dueDate;
+  editForm.querySelector('#description').value = todo.description;
+  editForm.querySelector('.button').innerHTML = 'Save changes';
+
+  const todoHiddenField = document.createElement('input');
+  todoHiddenField.setAttribute('type', 'hidden');
+  todoHiddenField.setAttribute('todo-index', todoIndex);
+  editForm.setAttribute('todo-index', todoIndex);
+  editForm.setAttribute('project-index', projectIndex);
+
+  modalContent.appendChild(editForm);
   modal.classList.add('active');
 };
 
@@ -63,7 +92,7 @@ const _createNewTodoModal = (projectIndex) => {
   const hiddenProjectInput = _createHiddenProjectField(projectIndex);
 
   const form = document.createElement('form')
-  form.id = 'new-todo-form';
+  form.id = 'todo-form';
 
   form.appendChild(todoTitle);
   form.appendChild(todoPriority);
@@ -219,6 +248,7 @@ const _createHiddenProjectField = (projectIndex) => {
   hiddenField.setAttribute('type', 'hidden');
   hiddenField.value = projectIndex;
   hiddenField.id = 'project-index';
+  hiddenField.setAttribute('project-index', projectIndex);
 
   return hiddenField;
 }
@@ -226,5 +256,8 @@ const _createHiddenProjectField = (projectIndex) => {
 export {
   displayTodoModal,
   displayNewTodoModal,
-  displayNewProjectModal
+  displayNewProjectModal,
+  displayEditTodoModal
 };
+
+// displayEditTodoModal({title: 'Hi', priority: 'Medium', description: 'Hi again'}, 1);

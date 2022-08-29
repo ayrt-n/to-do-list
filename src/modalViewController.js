@@ -33,32 +33,12 @@ const displayTodoModal = (todo, projectIndex, todoIndex) => {
   modal.classList.add('active');
 };
 
-// Display new todo form in a modal
-const displayNewTodoModal = (projectIndex) => {
+const displayTodoFormModal = (modalTitle, todo = {}, projectIndex, todoIndex) => {
   modalContent.innerHTML = '';
-  modalHeader.innerHTML = 'New todo';
-  const todoForm = _createNewTodoModal(projectIndex);
+  modalHeader.innerHTML = modalTitle;
+
+  const todoForm = _createTodoForm(todo, projectIndex, todoIndex)
   modalContent.appendChild(todoForm);
-  modal.classList.add('active');
-};
-
-const displayEditTodoModal = (todo, projectIndex, todoIndex) => {
-  modalContent.innerHTML = '';
-  modalHeader.innerHTML = 'Edit todo';
-  const editForm = _createNewTodoModal(projectIndex);
-  editForm.querySelector('#title').value = todo.title;
-  editForm.querySelector('#priority').value = todo.priority;
-  editForm.querySelector('#duedate').value = todo.dueDate;
-  editForm.querySelector('#description').value = todo.description;
-  editForm.querySelector('.button').innerHTML = 'Save changes';
-
-  const todoHiddenField = document.createElement('input');
-  todoHiddenField.setAttribute('type', 'hidden');
-  todoHiddenField.setAttribute('todo-index', todoIndex);
-  editForm.setAttribute('todo-index', todoIndex);
-  editForm.setAttribute('project-index', projectIndex);
-
-  modalContent.appendChild(editForm);
   modal.classList.add('active');
 };
 
@@ -83,25 +63,27 @@ const _createNewProjectModal = () => {
   return form;
 };
 
-const _createNewTodoModal = (projectIndex) => {
-  const todoTitle = _createTitleField();
-  const todoPriority = _createPriorityField();
-  const todoDueDate = _createDueDateField();
-  const todoDescription = _createDescriptionField();
-  const submitBtn = _createBtn('Add todo');
-  const hiddenProjectInput = _createHiddenProjectField(projectIndex);
+const _createTodoForm = (todo, projectIndex, todoIndex) => {
+  const todoTitle = _createTitleField(todo.title);
+  const todoPriority = _createPriorityField(todo.priority);
+  const todoDueDate = _createDueDateField(todo.dueDate);
+  const todoDescription = _createDescriptionField(todo.description);
+  // If todo is empty, new object and create button for creating new todo
+  // Otherwise, todo already exists and create button for editing todo
+  const submitBtn = Object.keys(todo).length === 0 ? _createBtn('Add todo') : _createBtn('Save changes');
 
-  const form = document.createElement('form')
-  form.id = 'todo-form';
+  const todoForm = document.createElement('form');
+  todoForm.id = 'todo-form';
+  todoForm.setAttribute('project-index', projectIndex);
+  todoForm.setAttribute('todo-index', todoIndex);
 
-  form.appendChild(todoTitle);
-  form.appendChild(todoPriority);
-  form.appendChild(todoDueDate);
-  form.appendChild(todoDescription);
-  form.appendChild(hiddenProjectInput);
-  form.appendChild(submitBtn);
+  todoForm.appendChild(todoTitle);
+  todoForm.appendChild(todoPriority);
+  todoForm.appendChild(todoDueDate);
+  todoForm.appendChild(todoDescription);
+  todoForm.appendChild(submitBtn);
 
-  return form;
+  return todoForm;
 };
 
 // Create more details modal and append to modal content div
@@ -141,18 +123,40 @@ const _createModalTextSection = (title, content) => {
   return div;
 };
 
-const _createTitleField = () => {
-  const titleDiv = document.createElement('div');
-  titleDiv.classList.add('field');
+const _createFormFieldDiv = () => {
+  const fieldDiv = document.createElement('div');
+  fieldDiv.classList.add('field');
 
-  const titleLabel = document.createElement('label');
-  titleLabel.classList.add('label');
-  titleLabel.setAttribute('for', 'title');
-  titleLabel.innerHTML = 'Title';
+  return fieldDiv;
+};
+
+const _createFormLabel = (labelValue, forValue) => {
+  const label = document.createElement('label');
+  label.classList.add('label');
+  label.setAttribute('for', forValue);
+  label.innerHTML = labelValue;
+
+  return label;
+};
+
+const _createControlDiv = () => {
+  const controlDiv = document.createElement('div');
+  controlDiv.classList.add('control');
+
+  return controlDiv
+}
+
+const _createTitleField = (titleValue) => {
+  const titleDiv = _createFormFieldDiv();
+  const titleLabel = _createFormLabel('Title', 'title');
+
   const titleInput = document.createElement('input');
   titleInput.id = 'title';
   titleInput.setAttribute('type', 'text');
-  titleInput.classList.add('input')
+  titleInput.classList.add('input');
+
+  // Set value if one was provided
+  if (titleValue) { titleInput.value = titleValue; } 
 
   titleDiv.appendChild(titleLabel);
   titleDiv.appendChild(titleInput);
@@ -160,26 +164,25 @@ const _createTitleField = () => {
   return titleDiv;
 };
 
-const _createPriorityField = () => {
-  const priorityDiv = document.createElement('div');
-  priorityDiv.classList.add('field');
-  const priorityOptions = ['Low', 'Medium', 'High'];
-  const priorityLabel = document.createElement('label');
-  priorityLabel.setAttribute('for', 'priority');
-  priorityLabel.classList.add('label');
-  priorityLabel.innerHTML = 'Priority';
-  const controlDiv = document.createElement('div');
-  controlDiv.classList.add('control');
+const _createPriorityField = (priorityValue) => {
+  const priorityDiv = _createFormFieldDiv();
+  const priorityLabel = _createFormLabel('Priority', 'priority');
+  const controlDiv = _createControlDiv();
+
   const selectDiv = document.createElement('div');
   selectDiv.classList.add('select');
+
   const priorityInput = document.createElement('select');
   priorityInput.id = 'priority';
+  const priorityOptions = ['Low', 'Medium', 'High'];
   for (let i = 0; i < priorityOptions.length; i++) {
     const priorityOption = document.createElement('option');
     priorityOption.value = priorityOptions[i];
     priorityOption.text = priorityOptions[i];
     priorityInput.appendChild(priorityOption);
   }
+
+  if (priorityValue) { priorityInput.value = priorityValue; }
 
   selectDiv.appendChild(priorityInput);
   controlDiv.appendChild(selectDiv);
@@ -190,21 +193,20 @@ const _createPriorityField = () => {
   return priorityDiv;
 };
 
-const _createDueDateField = () => {
-  const dueDateDiv = document.createElement('div');
-  dueDateDiv.classList.add('field');
-  const dueDateLabel = document.createElement('label');
-  dueDateLabel.setAttribute('for', 'duedate');
-  dueDateLabel.classList.add('label');
-  dueDateLabel.innerHTML = 'Due date';
-  const controlDiv = document.createElement('div');
-  controlDiv.classList.add('control');
+const _createDueDateField = (dueDateValue) => {
+  const dueDateDiv = _createFormFieldDiv();
+  const dueDateLabel = _createFormLabel('Due date', 'duedate');
+  const controlDiv = _createControlDiv();
+
   const dateDiv = document.createElement('div');
   dateDiv.classList.add('date');
+
   const dueDateInput = document.createElement('input');
   dueDateInput.id = 'duedate';
   dueDateInput.setAttribute('type', 'date');
   dueDateInput.setAttribute('max', '9999-12-31');
+
+  if (dueDateValue) { dueDateInput.value = dueDateValue; }
 
   dateDiv.appendChild(dueDateInput);
   controlDiv.appendChild(dateDiv);
@@ -215,16 +217,14 @@ const _createDueDateField = () => {
   return dueDateDiv;
 };
 
-const _createDescriptionField = () => {
-  const descriptionDiv = document.createElement('div');
-  descriptionDiv.classList.add('field');
-  const descriptionLabel = document.createElement('label');
-  descriptionLabel.setAttribute('for', 'description');
-  descriptionLabel.classList.add('label');
-  descriptionLabel.innerHTML = 'Description';
+const _createDescriptionField = (descriptionValue) => {
+  const descriptionDiv = _createFormFieldDiv();
+  const descriptionLabel = _createFormLabel('Description', 'description');
   const descriptionInput = document.createElement('textarea');
   descriptionInput.id = 'description';
   descriptionInput.classList.add('textarea');
+
+  if (descriptionValue) { descriptionInput.value = descriptionValue; }
 
   descriptionDiv.appendChild(descriptionLabel);
   descriptionDiv.appendChild(descriptionInput);
@@ -233,8 +233,7 @@ const _createDescriptionField = () => {
 };
 
 const _createBtn = (buttonText) => {
-  const fieldDiv = document.createElement('div');
-  fieldDiv.classList.add('field')
+  const fieldDiv = _createFormFieldDiv();
   const button = document.createElement('button');
   button.classList.add('button');
   button.innerHTML = buttonText;
@@ -255,9 +254,8 @@ const _createHiddenProjectField = (projectIndex) => {
 
 export {
   displayTodoModal,
-  displayNewTodoModal,
   displayNewProjectModal,
-  displayEditTodoModal
+  displayTodoFormModal
 };
 
 // displayEditTodoModal({title: 'Hi', priority: 'Medium', description: 'Hi again'}, 1);

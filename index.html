@@ -11,6 +11,7 @@
     <title>To Do List</title>
   </head>
   <body>
+    <!-- Navbar -->
     <nav class="navbar">
       <div class="navbar-item burger" id="burger" aria-label="menu" aria-expanded="false">
         <span class="line line1"></span>
@@ -18,8 +19,14 @@
         <span class="line line3"></span>
       </div>
     </nav>
-    <div class="menu is-hidden" id="menu"></div><div id="content">
-    </div>
+
+    <!-- Menu -->
+    <div class="menu is-hidden" id="menu"></div>
+    
+    <!-- Main Content (Todos) -->
+    <div id="content"></div>
+    
+    <!-- Modal container -->
     <div class="modal" id="modal">
       <div class="modal-card">
         <header class="modal-header-container">
@@ -29,6 +36,7 @@
         <div class="modal-content"></div>
       </div>
     </div>
+
     <script src="./main.js"></script>
   </body>
 </html>

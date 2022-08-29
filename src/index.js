@@ -3,7 +3,7 @@ import project from "./project";
 import { loadMenu, toggleMenuSelect } from "./menuViewController";
 import { displayTodoModal, displayNewTodoModal, displayNewProjectModal, displayEditTodoModal } from "./modalViewController";
 import { toggleTodoButton, loadProject, loadAllProjects, reloadProject, clearProjects } from "./todoViewController";
-import { loadProjectsFromLocalStorage, setObject, getObject } from "./localStorage";
+import { loadProjectsFromLocalStorage, setObject } from "./localStorage";
 
 // Load projects from local storage or generates new projects object
 const projects = loadProjectsFromLocalStorage();

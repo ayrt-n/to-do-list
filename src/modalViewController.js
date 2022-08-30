@@ -43,25 +43,35 @@ const displayTodoFormModal = (modalTitle, todo = {}, projectIndex, todoIndex) =>
 };
 
 // Display new project form in a modal
-const displayNewProjectModal = () => {
+const displayProjectForm = (modalTitle, project = '', projectIndex = '') => {
   modalContent.innerHTML = '';
-  modalHeader.innerHTML = 'New project';
-  const projectForm = _createNewProjectModal();
+  modalHeader.innerHTML = modalTitle;
+  const projectForm = _createProjectForm(project.name, projectIndex);
   modalContent.appendChild(projectForm);
   modal.classList.add('active');
 }
 
-const _createNewProjectModal = () => {
-  const projectTitle = _createTitleField();
-  const submitBtn = _createBtn('Add project');
+const _createProjectForm = (projectName, projectIndex) => {
+  const projectTitle = _createTitleField(projectName);
+  let projectBtn;
+  let deleteBtn;
+  
+  if (projectName) {
+    projectBtn = _createBtn('Save changes');
+    deleteBtn = _createBtn('Delete project', true);
+  } else {
+    projectBtn = _createBtn('Add project');
+  }
   const form = document.createElement('form');
-  form.id = 'new-project-form';
+  form.setAttribute('project-index', projectIndex);
+  form.id = 'project-form';
 
   form.appendChild(projectTitle);
-  form.appendChild(submitBtn);
+  form.appendChild(projectBtn);
+  if (deleteBtn) { form.appendChild(deleteBtn); }
 
   return form;
-};
+}
 
 const _createTodoForm = (todo, projectIndex, todoIndex) => {
   const todoTitle = _createTitleField(todo.title);
@@ -232,29 +242,20 @@ const _createDescriptionField = (descriptionValue) => {
   return descriptionDiv;
 };
 
-const _createBtn = (buttonText) => {
+const _createBtn = (buttonText, isDanger = '') => {
   const fieldDiv = _createFormFieldDiv();
   const button = document.createElement('button');
   button.classList.add('button');
+  if (isDanger) { button.classList.add('danger'); }
   button.innerHTML = buttonText;
 
   fieldDiv.appendChild(button);
   return fieldDiv;
 }
 
-const _createHiddenProjectField = (projectIndex) => {
-  const hiddenField = document.createElement('input');
-  hiddenField.setAttribute('type', 'hidden');
-  hiddenField.value = projectIndex;
-  hiddenField.id = 'project-index';
-  hiddenField.setAttribute('project-index', projectIndex);
-
-  return hiddenField;
-}
-
 export {
   displayTodoModal,
-  displayNewProjectModal,
+  displayProjectForm,
   displayTodoFormModal
 };
 

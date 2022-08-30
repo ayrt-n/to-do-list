@@ -179,10 +179,8 @@ p {
   font-size: 2rem;
 }
 
-.project-header-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.project-header {
+  cursor: pointer;
   margin-bottom: 1rem;
 }
 
@@ -372,6 +370,18 @@ input, textarea, select {
 
 .button:active, .button:focus {
   background-color: var(--primary-700);
+}
+
+.button.danger {
+  background-color: #dc2626;
+}
+
+.button.danger:hover {
+  background-color: #ef4444;
+}
+
+.button.danger:active, .button.danger:focus {
+  background-color: #b91c1c;
 }
 
 .button, .input, .textarea, .select select, .date input[type="date"] {

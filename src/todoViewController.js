@@ -60,14 +60,13 @@ const reloadProject = (project, projectIndex) => {
 
 // Create project header with associated buttons
 const createProjectHeader = (project, projectIndex) => {
-  const projectHeaderDiv = document.createElement('div');
-  projectHeaderDiv.classList.add('project-header-container');
-
   const projectHeader = document.createElement('h1');
+  projectHeader.classList.add('project-header');
   projectHeader.innerHTML = project.name;
-  projectHeaderDiv.appendChild(projectHeader)
+  projectHeader.setAttribute('project-index', projectIndex);
+  projectHeader.setAttribute('data-action', 'editProject');
 
-  return projectHeaderDiv;
+  return projectHeader;
 }
 
 // Create radio button element for todo list item

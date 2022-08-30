@@ -1,7 +1,7 @@
 import Todo from "./todo";
 import project from "./project";
 import { loadMenu, toggleMenuSelect } from "./menuViewController";
-import { displayTodoModal, displayTodoFormModal, displayNewProjectModal } from "./modalViewController";
+import { displayTodoModal, displayTodoFormModal, displayProjectForm } from "./modalViewController";
 import { toggleTodoButton, loadProject, loadAllProjects, reloadProject, clearProjects } from "./todoViewController";
 import { loadProjectsFromLocalStorage, setObject } from "./localStorage";
 
@@ -23,7 +23,7 @@ menu.addEventListener('click', (e) => {
 
   switch (menuAction) {
     case 'displayNewProjectModal':
-      displayNewProjectModal();
+      displayProjectForm('New project');
       break;
     case 'loadAllProjects':
       clearProjects();
@@ -66,6 +66,9 @@ mainContentDiv.addEventListener('click', (e) => {
         reloadProject(projects[projectIndex], projectIndex);
         setObject('projects', projects);
       }
+      break;
+    case 'editProject':
+      displayProjectForm('Edit project', projects[projectIndex], projectIndex);
       break;
     case 'viewTodoDetails':
       // Display modal with full todo details

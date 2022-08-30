@@ -87,43 +87,52 @@ modalContentDiv.addEventListener('click', (e) => {
 
   e.preventDefault(); // Stop button from submitting
   
-  // If button is to add new todo, create new todo, add to project object, and refresh the projects view
-  if (e.target.innerText === 'Add todo') {
-    const form = e.target.closest('form');
-    const projectIndex = form.getAttribute('project-index');
-    const todoItem = new Todo(document.getElementById('title').value,
-                              document.getElementById('description').value,
-                              document.getElementById('duedate').value,
-                              document.getElementById('priority').value);
-
-    projects[projectIndex].addTodo(todoItem);
-    reloadProject(projects[projectIndex], projectIndex);
-  // Else if button is to add new project, create a new project, add to project object, and refresh the menu view
-  } else if (e.target.innerText === 'Add project') {
-    const titleValue = document.getElementById('title').value
-    const projectItem = project(titleValue);
-
-    projects.push(projectItem);
-    loadMenu(projects);
-  } else if (e.target.innerText === 'Edit todo') {
-    const editDiv = modalContentDiv.querySelector('[project-index]');
-    const projectIndex = editDiv.getAttribute('project-index');
-    const todoIndex = editDiv.getAttribute('todo-index');
-
-    const todoItem = projects[projectIndex].getTodo(todoIndex);
-    displayTodoFormModal('Edit todo', todoItem, projectIndex, todoIndex);
-  } else if (e.target.innerText === 'Save changes') {
-    const form = e.target.closest('form');
-    const todoIndex = form.getAttribute('todo-index');
-    const projectIndex = form.getAttribute('project-index');
-    
-    projects[projectIndex].editTodo(todoIndex,
-                                    document.getElementById('title').value,
-                                    document.getElementById('description').value,
-                                    document.getElementById('duedate').value,
-                                    document.getElementById('priority').value)
-
-    reloadProject(projects[projectIndex], projectIndex);
+  switch (e.target.innerText) {
+    case 'Add todo': {
+      const form = e.target.closest('form');
+      const projectIndex = form.getAttribute('project-index');
+      const todoItem = new Todo(document.getElementById('title').value,
+                                document.getElementById('description').value,
+                                document.getElementById('duedate').value,
+                                document.getElementById('priority').value);
+  
+      projects[projectIndex].addTodo(todoItem);
+      reloadProject(projects[projectIndex], projectIndex);
+      break;
+    }
+    case 'Add project': {
+      const titleValue = document.getElementById('title').value
+      const projectItem = project(titleValue);
+  
+      projects.push(projectItem);
+      loadMenu(projects);
+      clearProjects();
+      loadProject(projects[(projects.length - 1)], projects.length - 1);
+      break;
+    }
+    case 'Edit todo': {
+      const editDiv = modalContentDiv.querySelector('[project-index]');
+      const projectIndex = editDiv.getAttribute('project-index');
+      const todoIndex = editDiv.getAttribute('todo-index');
+  
+      const todoItem = projects[projectIndex].getTodo(todoIndex);
+      displayTodoFormModal('Edit todo', todoItem, projectIndex, todoIndex);
+      break;
+    }
+    case 'Save changes': {
+      const form = e.target.closest('form');
+      const todoIndex = form.getAttribute('todo-index');
+      const projectIndex = form.getAttribute('project-index');
+      
+      projects[projectIndex].editTodo(todoIndex,
+                                      document.getElementById('title').value,
+                                      document.getElementById('description').value,
+                                      document.getElementById('duedate').value,
+                                      document.getElementById('priority').value)
+  
+      reloadProject(projects[projectIndex], projectIndex);
+      break;
+    }
   }
 
   setObject('projects', projects); // Save projects object

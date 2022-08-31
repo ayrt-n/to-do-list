@@ -122,7 +122,6 @@ modalContentDiv.addEventListener('click', (e) => {
         loadMenu(projects);
         clearProjects();
         loadAllProjects(projects);
-        setObject('projects', projects);
       }
       break;
     }
@@ -135,7 +134,7 @@ modalContentDiv.addEventListener('click', (e) => {
       displayTodoFormModal('Edit todo', todoItem, projectIndex, todoIndex);
       break;
     }
-    case 'Save changes': {
+    case 'Save todo': {
       const form = e.target.closest('form');
       const todoIndex = form.getAttribute('todo-index');
       const projectIndex = form.getAttribute('project-index');
@@ -148,6 +147,16 @@ modalContentDiv.addEventListener('click', (e) => {
   
       reloadProject(projects[projectIndex], projectIndex);
       break;
+    }
+    case 'Save project': {
+      const form = e.target.closest('form');
+      const projectIndex = form.getAttribute('project-index');
+      console.log(document.getElementById('title').value);
+      projects[projectIndex].setName(document.getElementById('title').value);
+
+      clearProjects();
+      loadMenu(projects);
+      loadProject(projects[projectIndex], projectIndex);
     }
   }
 

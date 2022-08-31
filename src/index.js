@@ -113,6 +113,18 @@ modalContentDiv.addEventListener('click', (e) => {
       loadProject(projects[(projects.length - 1)], projects.length - 1);
       break;
     }
+    case 'Delete project': {
+      const form = e.target.closest('form');
+      const projectIndex = form.getAttribute('project-index');
+
+      if (confirm('Are you sure you want to delete this project?')) {
+        projects.splice(projectIndex, 1);
+        loadMenu(projects);
+        clearProjects();
+        loadAllProjects(projects);
+        setObject('projects', projects);
+      }
+    }
     case 'Edit todo': {
       const editDiv = modalContentDiv.querySelector('[project-index]');
       const projectIndex = editDiv.getAttribute('project-index');

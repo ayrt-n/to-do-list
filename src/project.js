@@ -29,7 +29,7 @@ const project = (nameValue) => {
     const todo = todoList[index];
     todo.title = title;
     todo.description = description;
-    todo.dueDate = dueDate;
+    todo.dueDate = dueDate || 'N/A';
     todo.priority = priority;
   };
 

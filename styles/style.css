@@ -351,6 +351,20 @@ input, textarea, select {
   font-size: inherit;
 }
 
+.field.is-grouped {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.field.is-grouped > .control {
+  flex-shrink: 0;
+}
+
+.field.is-grouped > .control:not(:last-child) {
+  margin-bottom: 0;
+  margin-right: 0.75rem;
+}
+
 .control {
   box-sizing: border-box;
   clear: both;

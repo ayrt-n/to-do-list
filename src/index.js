@@ -124,6 +124,7 @@ modalContentDiv.addEventListener('click', (e) => {
         loadAllProjects(projects);
         setObject('projects', projects);
       }
+      break;
     }
     case 'Edit todo': {
       const editDiv = modalContentDiv.querySelector('[project-index]');

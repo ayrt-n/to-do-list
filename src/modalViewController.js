@@ -80,7 +80,7 @@ const _createTodoForm = (todo, projectIndex, todoIndex) => {
   const todoDescription = _createDescriptionField(todo.description);
   // If todo is empty, new object and create button for creating new todo
   // Otherwise, todo already exists and create button for editing todo
-  const submitBtn = Object.keys(todo).length === 0 ? _createBtn('Add todo') : _createBtn('Save to-do');
+  const submitBtn = Object.keys(todo).length === 0 ? _createBtn('Add todo') : _createBtn('Save todo');
 
   const todoForm = document.createElement('form');
   todoForm.id = 'todo-form';

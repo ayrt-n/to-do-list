@@ -1,5 +1,10 @@
-const project = (name) => {
+const project = (nameValue) => {
   const todoList = [];
+  let name = nameValue;
+
+  const setName = (newName) => {
+    obj.name = newName;
+  };
 
   const addTodo = (todo) => {
     todoList.push(todo);
@@ -32,7 +37,8 @@ const project = (name) => {
     return todoList[index];
   };
 
-  return { name, todoList, addTodo, addTodoList, removeTodo, toggleTodoStatus, editTodo, getTodo };
+  const obj = { name, todoList, addTodo, addTodoList, removeTodo, toggleTodoStatus, editTodo, getTodo, setName }
+  return obj;
 };
 
 export default project;

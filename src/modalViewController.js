@@ -57,8 +57,9 @@ const _createProjectForm = (projectName, projectIndex) => {
   let deleteBtn;
   
   if (projectName) {
-    projectBtn = _createBtn('Save changes');
-    deleteBtn = _createBtn('Delete project', true);
+    projectBtn = _createBtn('Save project');
+    deleteBtn = _createBtn('Delete project', 'danger');
+    projectBtn = _createBtnGroup(projectBtn, deleteBtn);
   } else {
     projectBtn = _createBtn('Add project');
   }
@@ -68,7 +69,6 @@ const _createProjectForm = (projectName, projectIndex) => {
 
   form.appendChild(projectTitle);
   form.appendChild(projectBtn);
-  if (deleteBtn) { form.appendChild(deleteBtn); }
 
   return form;
 }
@@ -80,7 +80,7 @@ const _createTodoForm = (todo, projectIndex, todoIndex) => {
   const todoDescription = _createDescriptionField(todo.description);
   // If todo is empty, new object and create button for creating new todo
   // Otherwise, todo already exists and create button for editing todo
-  const submitBtn = Object.keys(todo).length === 0 ? _createBtn('Add todo') : _createBtn('Save changes');
+  const submitBtn = Object.keys(todo).length === 0 ? _createBtn('Add todo') : _createBtn('Save to-do');
 
   const todoForm = document.createElement('form');
   todoForm.id = 'todo-form';
@@ -242,16 +242,28 @@ const _createDescriptionField = (descriptionValue) => {
   return descriptionDiv;
 };
 
-const _createBtn = (buttonText, isDanger = '') => {
-  const fieldDiv = _createFormFieldDiv();
+const _createBtn = (buttonText, ...classes) => {
+  const controlDiv = _createControlDiv();
   const button = document.createElement('button');
   button.classList.add('button');
-  if (isDanger) { button.classList.add('danger'); }
   button.innerHTML = buttonText;
 
-  fieldDiv.appendChild(button);
-  return fieldDiv;
+  for (let i = 0; i < classes.length; i++) {
+    button.classList.add(classes[i]);
+  }
+
+  controlDiv.appendChild(button);
+  return controlDiv;
 }
+
+const _createBtnGroup = (button1, button2) => {
+  const fieldGroupedDiv = document.createElement('div');
+  fieldGroupedDiv.classList.add('field', 'is-grouped');
+  fieldGroupedDiv.appendChild(button1);
+  fieldGroupedDiv.appendChild(button2);
+
+  return fieldGroupedDiv;
+};
 
 export {
   displayTodoModal,

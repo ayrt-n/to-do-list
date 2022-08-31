@@ -37,7 +37,12 @@ const project = (nameValue) => {
     return todoList[index];
   };
 
-  const obj = { name, todoList, addTodo, addTodoList, removeTodo, toggleTodoStatus, editTodo, getTodo, setName }
+  const todoListByDate = () => {
+    let sortedTodoList = todoList;
+    return sortedTodoList.sort((a, b) => a.dueDate.localeCompare(b.dueDate));
+  };
+
+  const obj = { name, todoList, addTodo, addTodoList, removeTodo, toggleTodoStatus, editTodo, getTodo, setName, todoListByDate }
   return obj;
 };
 

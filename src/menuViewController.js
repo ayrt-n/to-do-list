@@ -13,7 +13,9 @@ burger.addEventListener('click', () => {
 });
 
 menu.addEventListener('click', (e) => {
-  if (e.target.matches('.menu-item')) {
+  const menuItem = e.target.closest('.menu-item');
+
+  if (menuItem) {
     menu.classList.add('is-hidden');
   }
 });

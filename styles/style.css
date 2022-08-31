@@ -89,6 +89,10 @@ p {
   display: none;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 /* Navbar Styling */
 .navbar {
   box-sizing: border-box;
@@ -180,7 +184,6 @@ p {
 }
 
 .project-header {
-  cursor: pointer;
   margin-bottom: 1rem;
 }
 

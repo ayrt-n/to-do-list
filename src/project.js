@@ -42,7 +42,7 @@ const project = (nameValue) => {
     return sortedTodoList.sort((a, b) => a.dueDate.localeCompare(b.dueDate));
   };
 
-  const obj = { name, todoList, addTodo, addTodoList, removeTodo, toggleTodoStatus, editTodo, getTodo, setName, todoListByDate }
+  const obj = { name, todoList, addTodo, addTodoList, removeTodo, toggleTodoStatus, editTodo, getTodo, todoListByDate }
   return obj;
 };
 

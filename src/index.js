@@ -152,7 +152,7 @@ modalContentDiv.addEventListener('click', (e) => {
       const form = e.target.closest('form');
       const projectIndex = form.getAttribute('project-index');
       console.log(document.getElementById('title').value);
-      projects[projectIndex].setName(document.getElementById('title').value);
+      projects[projectIndex].name = document.getElementById('title').value;
 
       clearProjects();
       loadMenu(projects);

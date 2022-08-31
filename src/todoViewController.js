@@ -64,7 +64,11 @@ const createProjectHeader = (project, projectIndex) => {
   projectHeader.classList.add('project-header');
   projectHeader.innerHTML = project.name;
   projectHeader.setAttribute('project-index', projectIndex);
-  projectHeader.setAttribute('data-action', 'editProject');
+
+  if (!(projectIndex === 0 || projectIndex === '0')) {
+    projectHeader.setAttribute('data-action', 'editProject');
+    projectHeader.classList.add('pointer');
+  }
 
   return projectHeader;
 }

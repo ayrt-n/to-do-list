@@ -1,10 +1,5 @@
 # To-do List Web Application
 
-## Table of Contents
-- [Overview](#overview)
-- [Live Demo](#live-demo)
-- [Next Steps](#next-steps)
-
 ## Overview
 
 Project for The Odin Project (https://www.theodinproject.com/lessons/javascript-todo-list) as part of the JavaScript section of the course.

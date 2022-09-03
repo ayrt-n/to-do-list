@@ -22,4 +22,6 @@ While the app is fully functional, there are a number of potential improvements 
 
 As is, to-dos are displayed in the order in which you create them. Currently working on implementing the ability to sort to-do lists by date or priority. Additionally, While you can look through each of your individual projects, I am currently working on a calendar view, which would display all upcoming to-dos by date.
 
+Additionally, as is, to-dos and project forms do not have any user validation, allowing users to submit either with an empty title field. Currently working on implementing custom JavaScript form validation to ensure users provide the necessary fields.
+
 Not currently in development but would be nice to have in the future would be the ability to create recurring to-dos for events which happen on a regular schedule, as well as storing projects and to-dos in a database so that user data would be available across multiple devices.

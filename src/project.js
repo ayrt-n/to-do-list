@@ -2,10 +2,6 @@ const project = (nameValue) => {
   const todoList = [];
   let name = nameValue;
 
-  const setName = (newName) => {
-    obj.name = newName;
-  };
-
   const addTodo = (todo) => {
     todoList.push(todo);
   };

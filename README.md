@@ -14,6 +14,8 @@ The current iteration of the to-do list does not store data within a database bu
 
 The best way to view the project is live at https://ayrt-n.github.io/to-do-list/
 
+<img src="demo/livedemo.gif" alt="short demo of to-do list application" width=auto height="400px"/>
+
 ## Next Steps
 
 While the app is fully functional, there are a number of potential improvements which I am currently working on implementing in my free time.

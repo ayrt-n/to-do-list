@@ -3,7 +3,7 @@
 ## Table of Contents
 - [Overview](#overview)
 - [Live Demo](#live-demo)
-- Next Steps (#next-steps)
+- [Next Steps] (#next-steps)
 
 ## Overview
 
